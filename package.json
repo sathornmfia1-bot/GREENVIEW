@@ -1,0 +1,9 @@
+{
+  "name": "happy-green-mockup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HAPPY GREEN - Bangkok Lawn & Garden Marketplace mockup. Static, self-contained HTML (Tailwind CDN + vanilla JS) - no bundler, no build step required.",
+  "scripts": {
+    "build": "echo \"Static HTML site - nothing to bundle. index.html is served as-is.\" && exit 0"
+  }
+}
