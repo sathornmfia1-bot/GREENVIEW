@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 {"cleanUrls": true}
+=======
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "framework": null
+}
+>>>>>>> d7696d378d8c18aebaafc2203b1832bc8d2edb5c
