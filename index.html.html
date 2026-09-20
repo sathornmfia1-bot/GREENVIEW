@@ -1,0 +1,2234 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HAPPY GREEN — Bangkok Lawn &amp; Garden Marketplace Mockup</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1E3B2C;
+    --forest-deep:#122619;
+    --grass:#5B8C5A;
+    --grass-soft:#EAF1E7;
+    --gold:#C99A3D;
+    --gold-soft:#F6EAD1;
+    --ink:#1C2B22;
+    --paper:#F7F5EE;
+    --paper-dim:#EFEBDF;
+    --rain:#3F6E92;
+    --rain-soft:#E7EEF3;
+    --danger:#A8442C;
+    --danger-soft:#F4E5DF;
+    --line: rgba(28,43,34,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{ font-family:'IBM Plex Sans Thai', sans-serif; background:var(--paper-dim); color:var(--ink); }
+  .disp{ font-family:'Fraunces', serif; }
+  .phone{ width:390px; max-width:94vw; background:var(--paper); border-radius:34px; border:1px solid var(--line); box-shadow:0 30px 60px -25px rgba(18,38,25,0.45); overflow:hidden; }
+  .phone-notch{ height:28px; background:var(--forest-deep); display:flex; align-items:center; justify-content:space-between; padding:0 22px; }
+  .screen{ height:700px; overflow-y:auto; background:var(--paper); }
+  .screen::-webkit-scrollbar{ width:0; }
+  .app-header{ background:var(--forest); color:#fff; padding:16px 18px 20px; position:relative; }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; }
+  .pill{ border-radius:999px; }
+  .btn-primary{ background:var(--forest); color:#fff; border-radius:12px; padding:12px 16px; font-weight:600; transition:transform .12s ease; }
+  .btn-primary:active{ transform:scale(.98); }
+  .btn-gold{ background:var(--gold); color:var(--forest-deep); border-radius:12px; padding:12px 16px; font-weight:700; }
+  .btn-outline{ border:1px solid var(--forest); color:var(--forest); border-radius:12px; padding:10px 14px; font-weight:600; }
+  .navbtn{ display:flex; flex-direction:column; align-items:center; gap:2px; font-size:11px; color:#7C8A80; }
+  .navbtn.active{ color:var(--forest); font-weight:600; }
+  .tag-chip{ background:var(--grass-soft); color:var(--forest); border-radius:999px; padding:4px 10px; font-size:11px; font-weight:600; }
+  .step-dot{ width:26px; height:26px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; border:2px solid var(--line); background:#fff; color:#9AA69C; }
+  .step-dot.done{ background:var(--forest); border-color:var(--forest); color:#fff; }
+  .step-dot.now{ background:var(--gold); border-color:var(--gold); color:var(--forest-deep); }
+  .step-line{ flex:1; height:2px; background:var(--line); }
+  .step-line.done{ background:var(--forest); }
+  .role-tab{ padding:9px 18px; border-radius:999px; font-weight:600; font-size:14px; color:var(--forest); border:1px solid var(--line); background:#fff; }
+  .role-tab.active{ background:var(--forest); color:#fff; border-color:var(--forest); }
+  .cal-cell{ aspect-ratio:1/1; border-radius:9px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:12px; border:1px solid transparent; cursor:pointer; }
+  .cal-cell:hover{ border-color:var(--line); }
+  .dot{ width:5px; height:5px; border-radius:99px; margin-top:2px; }
+  .star{ font-size:26px; cursor:pointer; color:#D9D3C2; }
+  .star.on{ color:var(--gold); }
+  .qr-wrap{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; }
+</style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <header class="mb-6">
+    <p class="text-xs tracking-wide text-[color:var(--forest)] font-semibold mb-1">PRD MOCKUP · แพลตฟอร์มรวมช่างตัดหญ้า</p>
+    <h1 class="disp text-3xl md:text-4xl font-semibold text-[color:var(--forest-deep)]">HAPPY GREEN</h1>
+    <p class="text-sm text-[color:var(--ink)]/70 mt-1 max-w-lg">มอคอัพแอปมือถือแบบอินเทอร์แอกทีฟ 9 หน้าจอ ครอบคลุม 3 มุมมอง: ลูกค้า · ช่างตัดหญ้า · แอดมิน — คำนวณราคาและสถานะงานจริงตามตรรกะใน spec</p>
+  </header>
+  <!-- ROLE SWITCHER -->
+  <div class="flex flex-wrap gap-2 mb-5" id="roleTabs"></div>
+  <div class="flex flex-col md:flex-row gap-8 items-start">
+    <!-- PHONE -->
+    <div class="phone shrink-0">
+      <div class="phone-notch">
+        <span class="text-white text-[11px]" id="clockLabel">09:41</span>
+        <span class="text-white text-[11px]">●●● 5G 100%</span>
+      </div>
+      <div class="screen" id="screen"></div>
+      <div id="bottomNav" class="bg-white border-t" style="border-color:var(--line);"></div>
+    </div>
+    <!-- SIDE NOTES -->
+    <aside class="flex-1 w-full">
+      <div class="card p-5 mb-4">
+        <p class="disp text-lg font-semibold mb-2 text-[color:var(--forest-deep)]">กำลังดูหน้าจอ</p>
+        <p class="text-sm" id="pageBreadcrumb">—</p>
+      </div>
+      <div class="card p-5">
+        <p class="disp text-lg font-semibold mb-2 text-[color:var(--forest-deep)]">ตรรกะที่จำลองไว้</p>
+        <ul class="text-sm space-y-1.5 text-[color:var(--ink)]/80 list-disc pl-4">
+          <li>เครื่องคำนวณราคาตาม Service 1–4 + ตัวคูณความสูงหญ้า</li>
+          <li>แพ็กเกจรายเดือน (4/8 ครั้ง) จำกัดพื้นที่ ≤ 400 ตร.วา</li>
+          <li>จองล่วงหน้าได้สูงสุด 30 วัน</li>
+          <li>ทริกเกอร์ "ฝนตก" เปลี่ยนสถานะงานเป็น Weather_Delay</li>
+          <li>Wallet ช่าง: หัก platform fee 20%, จ่ายช่าง 80%</li>
+          <li>AI วิเคราะห์รีวิว (sentiment) แบบคำสำคัญ</li>
+          <li>ปฏิทินงานของช่างและแอดมิน อ่านจากชุดข้อมูลเดียวกัน (schedules table)</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+<script>
+/* ============================= DATA MODEL (mirrors Section 3 schema) ============================= */
+const DB = {
+  users: [{ user_id:'U001', first_name:'พิมพ์ชนก', last_name:'ศรีสุข', phone_number:'081-234-5678', default_address:'บ้านเลขที่ 12 ซ.สุขุมวิท 24 กรุงเทพฯ',
+    addresses: [
+      { address_id:'A001', label:'บ้าน', address:'บ้านเลขที่ 12 ซ.สุขุมวิท 24 กรุงเทพฯ', is_default:true },
+    ] }],
+  providers: [
+    { provider_id:'P001', provider_name:'สมชาย ใจดี', phone_number:'089-111-2222', bank_name:'กสิกรไทย', bank_account_no:'123-4-56789-0', account_name:'สมชาย ใจดี', current_rating:4.8, is_vip:true, service_radius_km:12, account_status:'Active', auto_withdraw_enabled:true, auto_withdraw_threshold:1000, base_address:'ซ.ทองหล่อ 10 กรุงเทพฯ', lat:13.7305, lng:100.5698 },
+    { provider_id:'P002', provider_name:'วิชัย ตัดหญ้าดี', phone_number:'082-333-4444', bank_name:'ไทยพาณิชย์', bank_account_no:'234-5-67890-1', current_rating:4.5, is_vip:false, service_radius_km:8, account_status:'Active', auto_withdraw_enabled:false, auto_withdraw_threshold:2000, base_address:'ถ.ลาดพร้าว กรุงเทพฯ', lat:13.7650, lng:100.5980 },
+    { provider_id:'P003', provider_name:'สายฝน สวนงาม', phone_number:'083-555-6666', bank_name:'กรุงไทย', bank_account_no:'345-6-78901-2', current_rating:4.9, is_vip:true, service_radius_km:15, account_status:'Active', auto_withdraw_enabled:false, auto_withdraw_threshold:1500, base_address:'ถ.เพชรเกษม ธนบุรี กรุงเทพฯ', lat:13.7180, lng:100.4550 },
+  ],
+  bookings: [],
+  schedules: [],
+  transactions: [],
+  reviews: [],
+  payouts: [],
+  notifications: [],
+  price_adjustments: [], // audit log: every "ขอปรับราคา" request, whatever the outcome
+  _bookingSeq: 1000,
+  _payoutSeq: 5000,
+  _notifSeq: 9000,
+  _userSeq: 1,
+  _providerSeq: 3,
+  _adjSeq: 0,
+};
+// seed a bit of history so Mechanic / Admin screens aren't empty
+(function seed(){
+  const today = new Date();
+  const mk = (d, status, sched, provider, area, type) => {
+    DB._bookingSeq++;
+    const bid = DB._bookingSeq;
+    DB.bookings.push({ booking_id:bid, user_id:'U001', provider_id:provider, booking_type: type, service_type: 'บริการตัดหญ้า', area_sqw:area, grass_height_level:'น้อยกว่า 6 นิ้ว', job_status: status, created_at:new Date() });
+    const dt = new Date(today.getFullYear(), today.getMonth(), d);
+    DB.schedules.push({ schedule_id: bid*10, booking_id:bid, provider_id:provider, scheduled_date: dt, time_slot: d%2===0?'เช้า':'บ่าย', schedule_status: sched });
+    const gross = area*35 + 800;
+    DB.transactions.push({ transaction_id:bid*10+1, booking_id:bid, gross_amount:gross, platform_fee_amount:+(gross*0.2).toFixed(2), provider_payout_amount:+(gross*0.8).toFixed(2), escrow_status: status==='Completed' ? 'Released':'Held', withdrawn:false });
+  };
+  mk(3,'Completed','Completed','P001',80,'One-time');
+  mk(8,'Completed','Completed','P001',150,'One-time');
+  mk(12,'In_Progress','Scheduled','P001',210,'Monthly');
+  mk(15,'Matched','Scheduled','P002',60,'One-time');
+  mk(18,'Weather_Delay','Weather_Cancelled','P001',95,'One-time');
+  mk(22,'Paid_Searching','Scheduled','P003',300,'Monthly');
+  DB.reviews.push({ review_id:1, booking_id:1001, rating_stars:5, customer_comment:'ทีมงานตรงเวลาและสนามหญ้าสะอาดมากค่ะ', ai_sentiment_result:'Positive', extracted_tags:['ตรงเวลา','สะอาด'] });
+  DB.reviews.push({ review_id:2, booking_id:1002, rating_stars:3, customer_comment:'งานโอเคแต่ราคาแพงไปหน่อย', ai_sentiment_result:'Neutral', extracted_tags:['ราคาแพง'] });
+})();
+/* ============================= APP STATE ============================= */
+const state = {
+  role: 'customer',            // customer | mechanic | admin
+  page: { customer:'register', mechanic:'register', admin:'control' },
+  currentProvider: 'P001',
+  calc: { mode:'onetime', service:1, area:100, grassHeight:'low', freq:4, date:null, photo:null, photoName:null, customerName: DB.users[0].first_name+' '+DB.users[0].last_name, address: DB.users[0].default_address },
+  activeBookingId: null,
+  calMonth: new Date().getMonth(),
+  calYear: new Date().getFullYear(),
+  selectedDay: null,
+  mechSelectedJobId: null,
+  mechAdjustOpen: false,
+  mechAdjustForm: { area:0, grassHeightCode:'low', debrisHours:0 },
+  reviewStars: 0,
+  adminFilter: 'All',
+  notifOpen: false,
+  lastWeatherCheck: null,
+  cancelFlowOpen: null,
+  cancelForm: { bankName:'', accountNo:'', accountName:'' },
+  refundAdjForm: { bankName:'', accountNo:'', accountName:'' },
+  adminCustomerTab: 'onetime',
+  profileEdit: { phoneEditing:false, phoneDraft:'', addAddressOpen:false, newAddress:{ label:'', address:'' } },
+  reg: {
+    customer: { first_name:'', last_name:'', phone_number:'', email:'', password:'', default_address:'' },
+    mechanic: { provider_name:'', phone_number:'', bank_name:'', bank_account_no:'', account_name:'', service_radius_km:10, base_address:'' , agree:false, id_card_photo:null, id_card_name:null },
+  },
+  // OTP verification state per role: idle → sent → verified
+  otp: {
+    customer: { stage:'idle', phone:'', code:'', input:'', error:'', secondsLeft:0 },
+    mechanic: { stage:'idle', phone:'', code:'', input:'', error:'', secondsLeft:0 },
+  },
+  regError: { customer:'', mechanic:'' },
+  regSuccess: { customer:null, mechanic:null }, // holds the created record once submitted
+};
+const ROLES = [
+  { id:'customer', label:'ลูกค้า', pages:['register','home','quote','track','review'] },
+  { id:'mechanic', label:'ช่างตัดหญ้า', pages:['register','jobpool','dashboard','schedule','inspect'] },
+  { id:'admin', label:'แอดมิน', pages:['control','customers','opscalendar'] },
+];
+const PAGE_META = {
+  register:{icon:'📝', label:'ลงทะเบียน', title:'ลงทะเบียนผู้ใช้งาน'},
+  jobpool:{icon:'📋', label:'งานใหม่', title:'งานใหม่ในพื้นที่'},
+  home:{icon:'🏠', label:'หน้าแรก', title:'คำนวณราคา & จอง'},
+  quote:{icon:'🧾', label:'ใบเสนอราคา', title:'ใบเสนอราคา & ชำระเงิน'},
+  track:{icon:'📍', label:'ติดตามงาน', title:'ติดตามสถานะงาน'},
+  review:{icon:'⭐', label:'รีวิว', title:'ให้คะแนนบริการ'},
+  profile:{icon:'⚙️', label:'บัญชีของฉัน', title:'จัดการเบอร์โทร & ที่อยู่'},
+  dashboard:{icon:'💰', label:'แดชบอร์ด', title:'แดชบอร์ด & กระเป๋าเงิน'},
+  schedule:{icon:'🗓️', label:'ตารางงาน', title:'ตารางงานประจำเดือน'},
+  inspect:{icon:'📸', label:'ตรวจงาน AI', title:'อัปโหลดตรวจงานด้วย AI'},
+  control:{icon:'📊', label:'ศูนย์ควบคุม', title:'ศูนย์ควบคุมระบบ'},
+  customers:{icon:'👥', label:'ลูกค้า', title:'ลูกค้าตามประเภท'},
+  opscalendar:{icon:'🗓️', label:'ปฏิทินรวม', title:'ปฏิทินปฏิบัติการรวม'},
+};
+/* ============================= PRICING ENGINE (Section 2) ============================= */
+function calcOneTime(serviceType, area, grassHeight){
+  const X = Number(area)||0;
+  const table = { 1:{base:1000, rate:2}, 2:{base:1500, rate:3}, 3:{base:1500, rate:4}, 4:{base:1500, rate:6} };
+  const t = table[serviceType];
+  const extra = X > 100 ? (X-100)*t.rate : 0;
+  let multiplier;
+  if(serviceType === 4){ multiplier = 1.0; }
+  else if(grassHeight === 'low') multiplier = 1.0;
+  else if(grassHeight === 'mid') multiplier = 1.5;
+  else multiplier = 2.0;
+  const subtotal = t.base + extra;
+  const total = Math.round(subtotal*multiplier);
+  return { base:t.base, extra, multiplier, subtotal, total };
+}
+function calcMonthly(freq, area){
+  const X = Number(area)||0;
+  if(freq==='monthly_fixed'){
+    return { price: 14100, warning:false, tierIdx:null, fixed:true };
+  }
+  const warning = X > 400;
+  const tierIdx = X<=100 ? 0 : (X<=250 ? 1 : 2);
+  const priceTable = { 2:[2000,3000,4200], 4:[3500,5000,7000], 8:[6000,8500,12000] };
+  const price = priceTable[freq][tierIdx];
+  return { price, warning, tierIdx, fixed:false };
+}
+const SERVICE_NAMES = {
+  1:'บริการ 1 · ตัดหญ้าอย่างเดียว (ไม่กวาดทิ้ง)',
+  2:'บริการ 2 · ตัดหญ้า+กวาดทิ้ง',
+  3:'บริการ 3 · ตัดหญ้า ตัดแต่งกิ่ง + กวาดทิ้ง',
+  4:'บริการ 4 · ตัดแต่งกิ่งอย่างเดียว (≤2ม.)',
+};
+const HEIGHT_NAMES = { low:'น้อยกว่า 6 นิ้ว', mid:'มากกว่า 6 นิ้ว', high:'มากกว่า 12 นิ้ว' };
+const THAI_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+function fmtThaiDate(dateStr){
+  if(!dateStr) return '';
+  const d = new Date(dateStr+'T00:00:00');
+  return `${d.getDate()} ${THAI_MONTHS[d.getMonth()]} ${d.getFullYear()+543}`;
+}
+const STATUS_TH = {
+  Pending_Payment:'รอชำระเงิน', Paid_Searching:'ชำระแล้ว · กำลังหาช่าง', Matched:'จับคู่ช่างแล้ว',
+  In_Progress:'ช่างกำลังทำงาน', Submitted_Review:'รอรีวิว', Completed:'เสร็จสมบูรณ์', Weather_Delay:'เลื่อนเนื่องจากฝนตก',
+  Provider_Timeout:'ช่างไม่เคลื่อนไหว · กำลังหาช่างใหม่', Cancelled_By_Customer:'ยกเลิกโดยลูกค้า · คืนเงินแล้ว'
+};
+const SCHED_COLOR = { Scheduled:'var(--grass)', Completed:'var(--forest)', Weather_Cancelled:'var(--rain)', Provider_Timeout:'var(--danger)' };
+/* ============================= SENTIMENT MOCK ============================= */
+const POS_WORDS = ['ดี','เยี่ยม','ประทับใจ','สะอาด','ตรงเวลา','สุภาพ','เร็ว','คุ้ม','ขอบคุณ','great','good','excellent','love'];
+const NEG_WORDS = ['แย่','ช้า','สกปรก','แพง','ไม่พอใจ','หยาบคาย','ผิดพลาด','เสียเวลา','bad','terrible','slow','rude'];
+const TAG_DICT = { 'ตรงเวลา':'ตรงเวลา','สะอาด':'สะอาด','ราคาแพง':'ราคาแพง','สุภาพ':'สุภาพ','รวดเร็ว':'รวดเร็ว','ช้า':'งานล่าช้า','ประทับใจ':'ประทับใจ' };
+function analyzeSentiment(text){
+  const t = text.toLowerCase();
+  let pos=0, neg=0;
+  POS_WORDS.forEach(w=>{ if(t.includes(w.toLowerCase())) pos++; });
+  NEG_WORDS.forEach(w=>{ if(t.includes(w.toLowerCase())) neg++; });
+  const tags = Object.keys(TAG_DICT).filter(k=> t.includes(k.toLowerCase())).map(k=>TAG_DICT[k]);
+  let result = 'Neutral';
+  if(pos>neg) result='Positive'; else if(neg>pos) result='Negative';
+  return { result, tags };
+}
+/* ============================= RENDER: SHELL ============================= */
+function renderRoleTabs(){
+  const el = document.getElementById('roleTabs');
+  el.innerHTML = ROLES.map(r=>`
+    <button class="role-tab ${state.role===r.id?'active':''}" onclick="setRole('${r.id}')">${r.label}</button>
+  `).join('');
+}
+function setRole(role){ state.role = role; renderAll(); }
+function setPage(page){ state.page[state.role] = page; renderAll(); }
+function renderBottomNav(){
+  const pages = ROLES.find(r=>r.id===state.role).pages;
+  const cur = state.page[state.role];
+  const openJobCount = state.role==='mechanic' ? DB.bookings.filter(b=>b.job_status==='Paid_Searching' && !b.provider_id && !jobPoolAccess(b, state.currentProvider).locked).length : 0;
+  document.getElementById('bottomNav').innerHTML = `
+    <div class="flex justify-around py-2.5">
+      ${pages.map(p=>`
+        <button class="navbtn relative ${cur===p?'active':''}" onclick="setPage('${p}')">
+          <span style="font-size:16px;">${PAGE_META[p].icon}</span>
+          <span>${PAGE_META[p].label}</span>
+          ${(p==='jobpool' && openJobCount>0) ? `<span class="absolute -top-0.5 right-1.5 min-w-[15px] h-[15px] px-1 rounded-full text-white text-[9px] font-bold flex items-center justify-center" style="background:var(--danger);">${openJobCount}</span>` : ''}
+        </button>
+      `).join('')}
+    </div>`;
+}
+function renderBreadcrumb(){
+  const roleLabel = ROLES.find(r=>r.id===state.role).label;
+  const cur = state.page[state.role];
+  document.getElementById('pageBreadcrumb').textContent = `${roleLabel} → ${PAGE_META[cur].title}`;
+}
+function screenHeader(title, subtitle){
+  return `<div class="app-header">
+      ${bellButton()}
+      ${profileButton()}
+      <p class="text-[11px] uppercase tracking-wide text-white/60 mb-1">${ROLES.find(r=>r.id===state.role).label}</p>
+      <h2 class="disp text-xl font-semibold">${title}</h2>
+      ${subtitle? `<p class="text-white/70 text-xs mt-1">${subtitle}</p>`:''}
+      ${state.notifOpen ? notifPanelHtml() : ''}
+    </div>`;
+}
+/* ============================= WEATHER AUTO-DETECTION & NOTIFICATIONS ============================= */
+function fmtDate(d){ return new Date(d).toLocaleDateString('th-TH', { day:'numeric', month:'short' }); }
+// deterministic mock "weather API" result per schedule — same schedule always gives the same reading
+function weatherHash(seed){
+  let h = 0;
+  for(const ch of String(seed)) h = (h*31 + ch.charCodeAt(0)) >>> 0;
+  return h % 100;
+}
+function checkWeatherForSchedule(schedId){
+  const s = DB.schedules.find(x=>x.schedule_id===schedId);
+  if(!s) return null;
+  const h = weatherHash(schedId + '|' + new Date(s.scheduled_date).toDateString());
+  return { rain: h < 35, chance: h };  // ~35% mock chance of rain on any given appointment day
+}
+// Runs automatically (on load + on an interval) — scans schedules whose appointment date IS today,
+// checks the mock weather, and if it detects rain, delays the job and notifies both sides on its own.
+function runAutoWeatherScan(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  DB.schedules.forEach(s=>{
+    if(s.schedule_status !== 'Scheduled') return;
+    const b = DB.bookings.find(x=>x.booking_id===s.booking_id);
+    if(!b || ['Completed','Weather_Delay'].includes(b.job_status)) return;
+    const schedDate = new Date(s.scheduled_date); schedDate.setHours(0,0,0,0);
+    if(schedDate.getTime() !== today.getTime()) return; // only auto-check on the actual appointment day
+    const result = checkWeatherForSchedule(s.schedule_id);
+    if(result.rain) applyWeatherDelay(s.schedule_id, true);
+  });
+  renderAll();
+}
+// Demo helper: forces the same weather-check pipeline to run right now for one schedule,
+// as if "today" were its appointment day — so the automatic detect-and-notify flow can be shown on demand.
+function forceWeatherCheck(schedId){
+  const result = checkWeatherForSchedule(schedId);
+  state.lastWeatherCheck = { schedId, ...result, time:new Date() };
+  if(result.rain) applyWeatherDelay(schedId, true);
+  else renderAll();
+}
+function forceWeatherCheckByBooking(bid){
+  let s = DB.schedules.find(x=>x.booking_id===bid);
+  if(!s){
+    const b = DB.bookings.find(x=>x.booking_id===bid);
+    s = { schedule_id: bid*10, booking_id:bid, provider_id:b.provider_id, scheduled_date:new Date(), time_slot:'เช้า', schedule_status:'Scheduled' };
+    DB.schedules.push(s);
+  }
+  forceWeatherCheck(s.schedule_id);
+}
+function applyWeatherDelay(schedId, auto){
+  const s = DB.schedules.find(x=>x.schedule_id===schedId);
+  s.schedule_status = 'Weather_Cancelled';
+  const b = DB.bookings.find(x=>x.booking_id===s.booking_id);
+  if(b) b.job_status = 'Weather_Delay';
+  addWeatherNotification(b, s, auto);
+  renderAll();
+}
+function addWeatherNotification(b, s, auto){
+  if(!b) return;
+  const msg = `งาน #${b.booking_id} วันที่ ${fmtDate(s.scheduled_date)} ถูกเลื่อนเนื่องจากฝนตก${auto? ' (ระบบตรวจพบอัตโนมัติ)':''}`;
+  DB._notifSeq++;
+  DB.notifications.push({ id:DB._notifSeq, booking_id:b.booking_id, audience:'customer', user_id:b.user_id, message:msg, created_at:new Date(), read:false });
+  DB._notifSeq++;
+  DB.notifications.push({ id:DB._notifSeq, booking_id:b.booking_id, audience:'provider', provider_id:b.provider_id, message:msg, created_at:new Date(), read:false });
+}
+// generic customer-facing notification for booking status changes (matched, work submitted, ฯลฯ)
+function addBookingNotification(b, message){
+  if(!b) return;
+  DB._notifSeq++;
+  DB.notifications.push({ id:DB._notifSeq, booking_id:b.booking_id, audience:'customer', user_id:b.user_id, message, created_at:new Date(), read:false });
+}
+// provider-facing notification (e.g. customer accepted/declined a price adjustment request)
+function addProviderNotification(b, message){
+  if(!b || !b.provider_id) return;
+  DB._notifSeq++;
+  DB.notifications.push({ id:DB._notifSeq, booking_id:b.booking_id, audience:'provider', provider_id:b.provider_id, message, created_at:new Date(), read:false });
+}
+function myNotifs(){
+  if(state.role==='customer') return DB.notifications.filter(n=>n.audience==='customer' && n.user_id==='U001').sort((a,b)=>b.id-a.id);
+  if(state.role==='mechanic') return DB.notifications.filter(n=>n.audience==='provider' && n.provider_id===state.currentProvider).sort((a,b)=>b.id-a.id);
+  return [];
+}
+function unreadNotifs(){ return myNotifs().filter(n=>!n.read); }
+function toggleNotifPanel(){
+  state.notifOpen = !state.notifOpen;
+  if(state.notifOpen) myNotifs().forEach(n=>n.read=true);
+  renderAll();
+}
+function bellButton(){
+  if(!['customer','mechanic'].includes(state.role)) return '';
+  const unread = unreadNotifs().length;
+  return `<button onclick="toggleNotifPanel()" style="position:absolute; top:16px; right:18px; color:#fff; font-size:16px;">
+      🔔${unread>0? `<span style="position:absolute; top:-5px; right:-8px; background:var(--gold); color:var(--forest-deep); font-size:10px; font-weight:700; border-radius:999px; padding:1px 5px; line-height:1.3;">${unread}</span>`:''}
+    </button>`;
+}
+function profileButton(){
+  if(state.role!=='customer') return '';
+  return `<button onclick="setPage('profile')" style="position:absolute; top:16px; right:52px; color:#fff; font-size:16px;">⚙️</button>`;
+}
+function notifPanelHtml(){
+  const list = myNotifs();
+  return `<div style="position:absolute; top:48px; right:12px; width:250px; background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 30px -10px rgba(0,0,0,.3); z-index:30; max-height:280px; overflow-y:auto;">
+      <div class="p-3">
+        <p class="text-sm font-semibold mb-1" style="color:var(--forest-deep)">การแจ้งเตือน</p>
+        ${list.length? list.map(n=>`
+          <div class="text-xs py-2 border-t" style="border-color:var(--line); color:var(--ink);">
+            <p>${n.message}</p>
+            <p style="opacity:.5; margin-top:2px;">${new Date(n.created_at).toLocaleString('th-TH')}</p>
+          </div>`).join('') : `<p class="text-xs" style="color:var(--ink); opacity:.5;">ยังไม่มีการแจ้งเตือน</p>`}
+      </div>
+    </div>`;
+}
+function renderAll(){
+  renderRoleTabs();
+  renderBottomNav();
+  renderBreadcrumb();
+  const cur = state.page[state.role];
+  const renderers = {
+    register: renderRegister,
+    jobpool: renderJobPool,
+    home: renderHome, quote: renderQuote, track: renderTrack, review: renderReview, profile: renderProfile,
+    dashboard: renderDashboard, schedule: renderSchedule, inspect: renderInspect,
+    control: renderControl, customers: renderCustomers, opscalendar: renderOpsCalendar,
+  };
+  document.getElementById('screen').innerHTML = renderers[cur]();
+  const clock = document.getElementById('clockLabel');
+  const n = new Date(); clock.textContent = n.toTimeString().slice(0,5);
+}
+/* ============================= REGISTRATION: CUSTOMER & MECHANIC ============================= */
+function renderRegister(){
+  return state.role === 'mechanic' ? renderRegisterMechanic() : renderRegisterCustomer();
+}
+function regInput(role, field, label, type, placeholder){
+  type = type || 'text'; placeholder = placeholder || '';
+  const val = state.reg[role][field];
+  return `<label class="text-xs font-semibold text-[color:var(--ink)]/60">${label}</label>
+    <input type="${type}" value="${val}" placeholder="${placeholder}" class="w-full mt-1 mb-3 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateReg('${role}','${field}', this.value)"/>`;
+}
+function bankSelect(){
+  const val = state.reg.mechanic.bank_name;
+  const banks = ['กสิกรไทย','ไทยพาณิชย์','กรุงไทย','กรุงเทพ','กรุงศรีอยุธยา','ทหารไทยธนชาต'];
+  return `<label class="text-xs font-semibold text-[color:var(--ink)]/60">ธนาคาร</label>
+    <select class="w-full mt-1 mb-3 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="updateReg('mechanic','bank_name', this.value)">
+      <option value="">เลือกธนาคาร</option>
+      ${banks.map(b=>`<option value="${b}" ${val===b?'selected':''}>${b}</option>`).join('')}
+    </select>`;
+}
+function updateReg(role, field, val){ state.reg[role][field] = val; }
+/* ============================= REGISTRATION: OTP PHONE VERIFICATION ============================= */
+// mockup only — a real system would send the code server-side and never expose it to the client
+function sendOtp(role){
+  const phone = (state.reg[role].phone_number||'').trim();
+  if(!phone){ state.otp[role].error = 'กรุณากรอกเบอร์โทรศัพท์ก่อนขอรหัส OTP'; renderAll(); return; }
+  const o = state.otp[role];
+  o.stage = 'sent';
+  o.phone = phone;
+  o.code = String(Math.floor(100000 + Math.random()*900000)); // 6 หลัก
+  o.input = '';
+  o.error = '';
+  o.secondsLeft = 60;
+  renderAll();
+  if(o._timer) clearInterval(o._timer);
+  o._timer = setInterval(()=>{
+    o.secondsLeft -= 1;
+    if(o.secondsLeft <= 0){ clearInterval(o._timer); o._timer = null; }
+    if(state.page[state.role]==='register') renderAll();
+  }, 1000);
+}
+function updateOtpInput(role, val){ state.otp[role].input = val; } // quiet update, keeps cursor
+function verifyOtp(role){
+  const o = state.otp[role];
+  if((o.input||'').trim() !== o.code){
+    o.error = 'รหัส OTP ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง';
+    renderAll(); return;
+  }
+  o.stage = 'verified';
+  o.error = '';
+  if(o._timer){ clearInterval(o._timer); o._timer = null; }
+  renderAll();
+}
+function resetOtp(role){
+  const o = state.otp[role];
+  if(o._timer){ clearInterval(o._timer); o._timer = null; }
+  state.otp[role] = { stage:'idle', phone:'', code:'', input:'', error:'', secondsLeft:0 };
+  renderAll();
+}
+function otpBlock(role){
+  const o = state.otp[role];
+  const currentPhone = (state.reg[role].phone_number||'').trim();
+  // if the phone number was edited after verifying, the old verification no longer applies.
+  // mutate state directly here (no renderAll) — we're already inside a render pass.
+  if(o.stage!=='idle' && o.phone !== currentPhone){
+    if(o._timer){ clearInterval(o._timer); o._timer = null; }
+    state.otp[role] = { stage:'idle', phone:'', code:'', input:'', error:'', secondsLeft:0 };
+    return otpBlock(role);
+  }
+  if(o.stage==='verified'){
+    return `<div class="flex items-center gap-2 text-xs px-3 py-2 rounded-lg" style="background:var(--grass-soft); color:var(--forest);">
+        <span>✅</span><span class="font-semibold">ยืนยันเบอร์โทรเรียบร้อยแล้ว</span>
+        <button class="ml-auto underline text-[11px]" onclick="resetOtp('${role}')">เปลี่ยนเบอร์</button>
+      </div>`;
+  }
+  if(o.stage==='sent'){
+    return `<div class="rounded-lg px-3 py-3 space-y-2" style="background:var(--paper-dim);">
+        <p class="text-[11px] text-[color:var(--ink)]/70">ส่งรหัส OTP 6 หลักไปที่ ${o.phone} แล้ว</p>
+        <p class="text-[11px]" style="color:var(--gold-deep, var(--gold));">🔐 (โหมดสาธิต) รหัสของคุณคือ <span class="font-bold">${o.code}</span></p>
+        <input type="text" inputmode="numeric" maxlength="6" placeholder="กรอกรหัส 6 หลัก" class="w-full px-3 py-2 rounded-lg border text-sm tracking-widest text-center" style="border-color:var(--line);" oninput="updateOtpInput('${role}', this.value)"/>
+        ${o.error? `<p class="text-[11px]" style="color:var(--danger);">⚠️ ${o.error}</p>`:''}
+        <div class="flex gap-2">
+          <button class="flex-1 btn-outline text-xs py-2 ${o.secondsLeft>0?'opacity-50':''}" ${o.secondsLeft>0?'disabled':''} onclick="sendOtp('${role}')">${o.secondsLeft>0? `ขอรหัสใหม่ (${o.secondsLeft}s)` : 'ขอรหัสใหม่'}</button>
+          <button class="flex-1 btn-gold text-xs py-2" onclick="verifyOtp('${role}')">ยืนยันรหัส</button>
+        </div>
+      </div>`;
+  }
+  return `<button class="btn-outline w-full text-xs py-2" onclick="sendOtp('${role}')">📲 ขอรหัส OTP เพื่อยืนยันเบอร์โทร</button>
+    ${o.error? `<p class="text-[11px] mt-1" style="color:var(--danger);">⚠️ ${o.error}</p>`:''}`;
+}
+/* ============================= REGISTRATION: ID CARD UPLOAD ============================= */
+function handleIdCardPhoto(role, input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    state.reg[role].id_card_photo = e.target.result;
+    state.reg[role].id_card_name = file.name;
+    renderAll();
+  };
+  reader.readAsDataURL(file);
+}
+function removeIdCardPhoto(role){
+  state.reg[role].id_card_photo = null;
+  state.reg[role].id_card_name = null;
+  renderAll();
+}
+function idCardBlock(role){
+  const f = state.reg[role];
+  return `<div class="card p-4">
+      <p class="text-xs font-semibold text-[color:var(--ink)]/60">แนบรูปบัตรประชาชน</p>
+      <p class="text-[11px] text-[color:var(--ink)]/50 mt-0.5 mb-2">ใช้เพื่อยืนยันตัวตนเท่านั้น ข้อมูลถูกเก็บเป็นความลับตามนโยบายความเป็นส่วนตัว</p>
+      ${f.id_card_photo ? `
+        <div class="relative">
+          <img src="${f.id_card_photo}" class="w-full h-36 object-cover rounded-lg border" style="border-color:var(--line);" />
+          <button onclick="removeIdCardPhoto('${role}')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white text-sm flex items-center justify-center">✕</button>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-[11px] text-[color:var(--ink)]/60">
+          <span>📎</span><span class="truncate">${f.id_card_name || 'บัตรประชาชน.jpg'}</span>
+          <span class="tag-chip ml-auto" style="background:var(--grass-soft); color:var(--forest);">แนบแล้ว</span>
+        </div>
+      ` : `
+        <label class="w-full flex flex-col items-center justify-center gap-1.5 py-6 rounded-lg border border-dashed cursor-pointer" style="border-color:var(--line);">
+          <span class="text-2xl">🪪</span>
+          <span class="text-xs font-semibold text-[color:var(--forest)]">แตะเพื่อแนบรูปบัตรประชาชน</span>
+          <span class="text-[11px] text-[color:var(--ink)]/50">ถ่ายให้เห็นข้อมูลชัดเจน ไม่มีแสงสะท้อน</span>
+          <input type="file" accept="image/*" class="hidden" onchange="handleIdCardPhoto('${role}', this)"/>
+        </label>
+      `}
+    </div>`;
+}
+function renderRegisterCustomer(){
+  const success = state.regSuccess.customer;
+  if(success){
+    return `${screenHeader('ลงทะเบียนสำเร็จ 🌿')}
+      <div class="p-4 space-y-4">
+        <div class="card p-5 text-center">
+          <p class="text-3xl mb-2">✅</p>
+          <p class="disp text-lg font-semibold text-[color:var(--forest-deep)] mb-1">ยินดีต้อนรับคุณ${success.first_name}</p>
+          <p class="text-xs text-[color:var(--ink)]/60">รหัสสมาชิก ${success.user_id}</p>
+        </div>
+        <button class="btn-gold w-full" onclick="setPage('home')">เริ่มใช้งาน — ไปหน้าแรก →</button>
+        <button class="btn-outline w-full" onclick="resetRegistration('customer')">ลงทะเบียนบัญชีใหม่อีกครั้ง</button>
+      </div>`;
+  }
+  const f = state.reg.customer;
+  return `
+    ${screenHeader('สมัครสมาชิกลูกค้า', 'เริ่มต้นดูแลสนามหญ้าของคุณ')}
+    <div class="p-4 space-y-3">
+      <div class="card p-4">
+        ${regInput('customer','first_name','ชื่อจริง')}
+        ${regInput('customer','last_name','นามสกุล')}
+        ${regInput('customer','phone_number','เบอร์โทรศัพท์','tel','08X-XXX-XXXX')}
+        ${otpBlock('customer')}
+        <div class="mt-3">${regInput('customer','email','อีเมล','email')}</div>
+        ${regInput('customer','password','ตั้งรหัสผ่าน','password')}
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">ที่อยู่หลักสำหรับให้บริการ</label>
+        <textarea rows="2" class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateReg('customer','default_address', this.value)">${f.default_address}</textarea>
+      </div>
+      ${state.regError.customer? `<p class="text-xs" style="color:var(--danger);">⚠️ ${state.regError.customer}</p>`:''}
+      <button class="btn-gold w-full" onclick="submitCustomerReg()">สมัครสมาชิก</button>
+      <p class="text-[11px] text-center text-[color:var(--ink)]/50">มีบัญชีอยู่แล้ว? <span class="underline cursor-pointer" onclick="setPage('home')">ไปหน้าแรก</span></p>
+    </div>`;
+}
+function renderRegisterMechanic(){
+  const success = state.regSuccess.mechanic;
+  if(success){
+    return `${screenHeader('ลงทะเบียนสำเร็จ 🌿')}
+      <div class="p-4 space-y-4">
+        <div class="card p-5 text-center">
+          <p class="text-3xl mb-2">✅</p>
+          <p class="disp text-lg font-semibold text-[color:var(--forest-deep)] mb-1">สมัครเป็นช่างสำเร็จ</p>
+          <p class="text-xs text-[color:var(--ink)]/60">รหัสช่าง ${success.provider_id} · สถานะ: ${success.account_status}</p>
+          <p class="text-xs text-[color:var(--ink)]/60 mt-1">ทีมแอดมินจะตรวจสอบและเปิดใช้งานบัญชีให้เร็วๆ นี้</p>
+        </div>
+        <button class="btn-outline w-full" onclick="resetRegistration('mechanic')">ลงทะเบียนบัญชีใหม่อีกครั้ง</button>
+      </div>`;
+  }
+  const f = state.reg.mechanic;
+  return `
+    ${screenHeader('สมัครเป็นช่างตัดหญ้า', 'ร่วมเป็นพาร์ทเนอร์กับเรา')}
+    <div class="p-4 space-y-3">
+      <div class="card p-4">
+        ${regInput('mechanic','provider_name','ชื่อ-นามสกุลช่าง')}
+        ${regInput('mechanic','phone_number','เบอร์โทรศัพท์','tel','08X-XXX-XXXX')}
+        ${otpBlock('mechanic')}
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60 block mt-3">พื้นที่ให้บริการ (รัศมี กม.)</label>
+        <input type="number" min="1" value="${f.service_radius_km}" class="w-full mt-1 mb-3 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateReg('mechanic','service_radius_km', this.value)"/>
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">ที่อยู่ฐานปฏิบัติงาน</label>
+        <textarea rows="2" class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateReg('mechanic','base_address', this.value)">${f.base_address}</textarea>
+      </div>
+      <div class="card p-4">
+        <p class="text-xs font-semibold text-[color:var(--ink)]/60 mb-2">ข้อมูลบัญชีรับเงิน</p>
+        ${bankSelect()}
+        ${regInput('mechanic','bank_account_no','เลขที่บัญชี')}
+        ${regInput('mechanic','account_name','ชื่อบัญชี')}
+      </div>
+      ${idCardBlock('mechanic')}
+      <label class="flex items-start gap-2 text-xs text-[color:var(--ink)]/70">
+        <input type="checkbox" ${f.agree?'checked':''} onchange="updateReg('mechanic','agree', this.checked)" class="mt-0.5"/>
+        <span>ยอมรับข้อกำหนดการเป็นพาร์ทเนอร์และนโยบายค่าธรรมเนียมแพลตฟอร์ม 20%</span>
+      </label>
+      ${state.regError.mechanic? `<p class="text-xs" style="color:var(--danger);">⚠️ ${state.regError.mechanic}</p>`:''}
+      <button class="btn-gold w-full" onclick="submitMechanicReg()">สมัครเป็นช่าง</button>
+    </div>`;
+}
+function submitCustomerReg(){
+  const f = state.reg.customer;
+  if(!f.first_name || !f.last_name || !f.phone_number || !f.default_address){
+    state.regError.customer = 'กรุณากรอกชื่อ นามสกุล เบอร์โทร และที่อยู่ให้ครบถ้วน';
+    renderAll(); return;
+  }
+  if(state.otp.customer.stage !== 'verified'){
+    state.regError.customer = 'กรุณายืนยันเบอร์โทรศัพท์ด้วยรหัส OTP ก่อนสมัคร';
+    renderAll(); return;
+  }
+  DB._userSeq++;
+  const newUser = { user_id:'U'+String(100+DB._userSeq), first_name:f.first_name, last_name:f.last_name, phone_number:f.phone_number, default_address:f.default_address,
+    phone_verified:true,
+    addresses:[{ address_id:'A'+String(200+DB._userSeq), label:'บ้าน', address:f.default_address, is_default:true }] };
+  DB.users.push(newUser);
+  state.regError.customer = '';
+  state.regSuccess.customer = newUser;
+  renderAll();
+}
+function submitMechanicReg(){
+  const f = state.reg.mechanic;
+  if(!f.provider_name || !f.phone_number || !f.bank_name || !f.bank_account_no || !f.base_address){
+    state.regError.mechanic = 'กรุณากรอกข้อมูลส่วนตัวและข้อมูลบัญชีให้ครบถ้วน';
+    renderAll(); return;
+  }
+  if(state.otp.mechanic.stage !== 'verified'){
+    state.regError.mechanic = 'กรุณายืนยันเบอร์โทรศัพท์ด้วยรหัส OTP ก่อนสมัคร';
+    renderAll(); return;
+  }
+  if(!f.id_card_photo){
+    state.regError.mechanic = 'กรุณาแนบรูปบัตรประชาชนเพื่อยืนยันตัวตน';
+    renderAll(); return;
+  }
+  if(!f.agree){
+    state.regError.mechanic = 'กรุณายอมรับข้อกำหนดการเป็นพาร์ทเนอร์ก่อนสมัคร';
+    renderAll(); return;
+  }
+  DB._providerSeq++;
+  const newProvider = {
+    provider_id:'P'+String(100+DB._providerSeq), provider_name:f.provider_name, phone_number:f.phone_number,
+    bank_name:f.bank_name, bank_account_no:f.bank_account_no, account_name:f.account_name || f.provider_name,
+    current_rating:0, is_vip:false, service_radius_km:Number(f.service_radius_km)||10, account_status:'Pending Verification',
+    auto_withdraw_enabled:false, auto_withdraw_threshold:1000, base_address:f.base_address,
+    phone_verified:true, id_card_photo:f.id_card_photo,
+  };
+  DB.providers.push(newProvider);
+  state.regError.mechanic = '';
+  state.regSuccess.mechanic = newProvider;
+  renderAll();
+}
+function resetRegistration(role){
+  state.regSuccess[role] = null;
+  state.regError[role] = '';
+  resetOtp(role);
+  if(role==='customer') state.reg.customer = { first_name:'', last_name:'', phone_number:'', email:'', password:'', default_address:'' };
+  else state.reg.mechanic = { provider_name:'', phone_number:'', bank_name:'', bank_account_no:'', account_name:'', service_radius_km:10, base_address:'', agree:false, id_card_photo:null, id_card_name:null };
+  renderAll();
+}
+/* ============================= CUSTOMER: PAGE 1 — HOME & CALCULATOR ============================= */
+function renderHome(){
+  const c = state.calc;
+  let priceBlock = '';
+  if(c.mode==='onetime'){
+    const r = calcOneTime(c.service, c.area, c.grassHeight);
+    priceBlock = `
+      <div class="text-sm space-y-1 text-[color:var(--ink)]/80">
+        <div class="flex justify-between"><span>ราคาฐาน</span><span>${r.base.toLocaleString()} บาท</span></div>
+        <div class="flex justify-between"><span>ส่วนเกินพื้นที่</span><span>${Math.round(r.extra).toLocaleString()} บาท</span></div>
+        <div class="flex justify-between"><span>ตัวคูณความสูงหญ้า</span><span>×${r.multiplier.toFixed(1)}</span></div>
+      </div>
+      <div class="flex justify-between items-center mt-3 pt-3 border-t" style="border-color:var(--line);">
+        <span class="font-semibold">ยอดรวมประเมิน</span>
+        <span class="disp text-2xl font-semibold text-[color:var(--forest-deep)]">${r.total.toLocaleString()} ฿</span>
+      </div>`;
+  } else {
+    const r = calcMonthly(c.freq, c.area);
+    priceBlock = `
+      <div class="text-sm space-y-1 text-[color:var(--ink)]/80">
+        <div class="flex justify-between"><span>แพ็กเกจ</span><span>${c.freq==='monthly_fixed' ? 'รายเดือน (หยุดวันอาทิตย์)' : c.freq+' ครั้ง/เดือน'}</span></div>
+        <div class="flex justify-between"><span>พื้นที่</span><span>${c.area} ตร.วา</span></div>
+      </div>
+      <div class="flex justify-between items-center mt-3 pt-3 border-t" style="border-color:var(--line);">
+        <span class="font-semibold">ค่าแพ็กเกจ/เดือน</span>
+        <span class="disp text-2xl font-semibold text-[color:var(--forest-deep)]">${r.price.toLocaleString()} ฿</span>
+      </div>
+      ${r.warning? `<p class="text-xs mt-2 px-3 py-2 rounded-lg" style="background:var(--danger-soft); color:var(--danger);">⚠️ พื้นที่เกิน 400 ตร.วา สูงสุดของแพ็กเกจรายเดือน กรุณาติดต่อฝ่ายลูกค้าสัมพันธ์สำหรับราคาพิเศษ</p>`:''}
+    `;
+  }
+  return `
+    ${screenHeader('สวัสดีคุณพิมพ์ชนก 👋', 'ให้เราดูแลสนามหญ้าของคุณวันนี้')}
+    <div class="p-4 space-y-4">
+      <div class="flex gap-2">
+        <button class="flex-1 py-2 text-sm font-semibold rounded-xl ${c.mode==='onetime'?'text-white':'text-[color:var(--forest)]'}" style="background:${c.mode==='onetime'?'var(--forest)':'var(--grass-soft)'}" onclick="setCalcMode('onetime')">จ่ายครั้งเดียว</button>
+        <button class="flex-1 py-2 text-sm font-semibold rounded-xl ${c.mode==='monthly'?'text-white':'text-[color:var(--forest)]'}" style="background:${c.mode==='monthly'?'var(--forest)':'var(--grass-soft)'}" onclick="setCalcMode('monthly')">แพ็กเกจรายเดือน</button>
+      </div>
+      <div class="card p-4">
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">พื้นที่สนามหญ้า (ตารางวา)</label>
+        <input type="number" min="1" value="${c.area}" class="w-full mt-1 mb-3 px-3 py-2 rounded-lg border text-lg font-semibold" style="border-color:var(--line);" oninput="updateCalc('area', this.value)"/>
+        ${c.mode==='onetime' ? `
+          <label class="text-xs font-semibold text-[color:var(--ink)]/60">ประเภทบริการ</label>
+          <select class="w-full mt-1 mb-3 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="updateCalc('service', this.value)">
+            ${[1,2,3,4].map(s=>`<option value="${s}" ${c.service==s?'selected':''}>${SERVICE_NAMES[s]}</option>`).join('')}
+          </select>
+          ${c.service != 4 ? `
+          <label class="text-xs font-semibold text-[color:var(--ink)]/60">ความสูงของหญ้า</label>
+          <select class="w-full mt-1 mb-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="updateCalc('grassHeight', this.value)">
+            <option value="low" ${c.grassHeight==='low'?'selected':''}>น้อยกว่า 6 นิ้ว (×1.0)</option>
+            <option value="mid" ${c.grassHeight==='mid'?'selected':''}>มากกว่า 6 นิ้ว (×1.5)</option>
+            <option value="high" ${c.grassHeight==='high'?'selected':''}>มากกว่า 12 นิ้ว (×2.0)</option>
+          </select>` : `<p class="text-xs text-[color:var(--ink)]/50 mb-1">บริการตัดแต่งกิ่งใช้ตัวคูณคงที่ ×1.0 เสมอ</p>`}
+        ` : `
+          <label class="text-xs font-semibold text-[color:var(--ink)]/60">ความถี่แพ็กเกจ</label>
+          <select class="w-full mt-1 mb-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="updateCalc('freq', this.value)">
+            <option value="2" ${c.freq==2?'selected':''}>2 ครั้ง/เดือน</option>
+            <option value="4" ${c.freq==4?'selected':''}>4 ครั้ง/เดือน</option>
+            <option value="8" ${c.freq==8?'selected':''}>8 ครั้ง/เดือน</option>
+            <option value="monthly_fixed" ${c.freq==='monthly_fixed'?'selected':''}>รายเดือน (หยุดวันอาทิตย์)</option>
+          </select>
+          ${c.freq==='monthly_fixed' ? `<p class="text-[11px] text-[color:var(--ink)]/50 -mt-0.5">ดูแลความสะอาดสวน ลดน้ำต้นไม้ กวาดใบไม้ ถอนวัชพืช ตัดหญ้า แต่งกิ่งไม้</p>` : ''}
+        `}
+      </div>
+      <div class="card p-4">
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">แนบรูปภาพสนามหญ้า (ไม่บังคับ)</label>
+        <p class="text-[11px] text-[color:var(--ink)]/50 mt-0.5 mb-2">แนบรูปเพื่อให้การประเมินราคาแม่นยำขึ้น ช่างจะเห็นสภาพหน้างานจริงก่อนตีราคา</p>
+        ${c.photo ? `
+          <div class="relative">
+            <img src="${c.photo}" class="w-full h-36 object-cover rounded-lg border" style="border-color:var(--line);" />
+            <button onclick="removeCalcPhoto()" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white text-sm flex items-center justify-center">✕</button>
+          </div>
+          <div class="flex items-center gap-2 mt-2 text-[11px] text-[color:var(--ink)]/60">
+            <span>📎</span><span class="truncate">${c.photoName || 'รูปภาพ.jpg'}</span>
+            <span class="tag-chip ml-auto" style="background:var(--grass-soft); color:var(--forest);">เพิ่มความแม่นยำ +</span>
+          </div>
+        ` : `
+          <label class="w-full flex flex-col items-center justify-center gap-1.5 py-6 rounded-lg border border-dashed cursor-pointer" style="border-color:var(--line);">
+            <span class="text-2xl">📷</span>
+            <span class="text-xs font-semibold text-[color:var(--forest)]">แตะเพื่อแนบรูปภาพ</span>
+            <span class="text-[11px] text-[color:var(--ink)]/50">JPG, PNG ขนาดไม่เกิน 10MB</span>
+            <input type="file" accept="image/*" class="hidden" onchange="handleCalcPhoto(this)"/>
+          </label>
+        `}
+      </div>
+      <div class="card p-4">${priceBlock}</div>
+      <div class="card p-4">
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">เลือกวันนัดหมาย (จองล่วงหน้าได้สูงสุด 30 วัน)</label>
+        <input type="date" id="schedDateInput" class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="validateDate(this)"/>
+        <p id="dateWarning" class="text-xs mt-1.5" style="color:var(--danger);"></p>
+      </div>
+      <button class="btn-gold w-full" onclick="goToQuote()">ดูใบเสนอราคา →</button>
+    </div>
+  `;
+}
+function setCalcMode(m){ state.calc.mode = m; renderAll(); }
+function updateCalcText(field, val){
+  // text fields: update state quietly without a full re-render, so focus/cursor position is preserved
+  state.calc[field] = val;
+}
+function updateCalc(field, val){
+  if(field==='area') state.calc.area = Math.max(1, Number(val)||0);
+  else if(field==='service') state.calc.service = Number(val);
+  else if(field==='grassHeight') state.calc.grassHeight = val;
+  else if(field==='freq') state.calc.freq = (val==='monthly_fixed') ? val : Number(val);
+  renderAll();
+  setTimeout(()=>{ const inp=document.querySelector('input[type=number]'); if(inp) inp.focus(); },0);
+}
+function handleCalcPhoto(input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    state.calc.photo = e.target.result;
+    state.calc.photoName = file.name;
+    renderAll();
+  };
+  reader.readAsDataURL(file);
+}
+function removeCalcPhoto(){
+  state.calc.photo = null;
+  state.calc.photoName = null;
+  renderAll();
+}
+function setupDateLimits(){
+  const inp = document.getElementById('schedDateInput');
+  if(!inp) return;
+  const today = new Date();
+  const max = new Date(); max.setDate(today.getDate()+30);
+  const fmt = d => d.toISOString().slice(0,10);
+  inp.min = fmt(today);
+  inp.max = fmt(max);
+  if(state.calc.date) inp.value = state.calc.date;
+}
+function validateDate(inp){
+  const chosen = new Date(inp.value);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const max = new Date(); max.setDate(today.getDate()+30);
+  const warn = document.getElementById('dateWarning');
+  if(chosen < today || chosen > max){
+    warn.textContent = '⚠️ เลือกได้เฉพาะวันที่ภายใน 30 วันข้างหน้าเท่านั้น';
+    inp.value = '';
+    state.calc.date = null;
+  } else {
+    warn.textContent = '';
+    state.calc.date = inp.value;
+  }
+}
+function goToQuote(){
+  const c = state.calc;
+  DB._bookingSeq++;
+  const bid = DB._bookingSeq;
+  const price = c.mode==='onetime' ? calcOneTime(c.service,c.area,c.grassHeight).total : calcMonthly(c.freq,c.area).price;
+  const booking = {
+    booking_id: bid, user_id:'U001', provider_id:null,
+    booking_type: c.mode==='onetime' ? 'One-time' : 'Monthly',
+    service_type: c.mode==='onetime' ? SERVICE_NAMES[c.service] : (c.freq==='monthly_fixed' ? 'แพ็กเกจรายเดือน (หยุดวันอาทิตย์)' : `แพ็กเกจ ${c.freq} ครั้ง/เดือน`),
+    area_sqw: c.area, grass_height_level: HEIGHT_NAMES[c.grassHeight] || '-',
+    service_type_id: c.mode==='onetime' ? c.service : null,
+    grass_height_code: c.mode==='onetime' ? c.grassHeight : null,
+    monthly_freq: c.mode==='monthly' ? c.freq : null,
+    debris_hours: 0, debris_fee: 0,
+    job_status: 'Pending_Payment', price, created_at: new Date(), sched_date: state.calc.date,
+    customer_name: c.customerName || (DB.users[0].first_name+' '+DB.users[0].last_name),
+    customer_phone: DB.users[0].phone_number,
+    work_address: c.address || DB.users[0].default_address, photo: c.photo || null,
+    monthly_unit_price: price, months_paid: 1, months_remaining: 1
+  };
+  DB.bookings.push(booking);
+  state.activeBookingId = bid;
+  state.page.customer = 'quote';
+  renderAll();
+}
+function setQuoteMonths(bid, months){
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  if(!b || b.job_status!=='Pending_Payment') return;
+  b.months_paid = months;
+  b.months_remaining = months;
+  b.price = b.monthly_unit_price * months;
+  renderAll();
+}
+/* ============================= CUSTOMER: PAGE 2 — QUOTATION & QR PAYMENT ============================= */
+function renderQuote(){
+  const b = DB.bookings.find(x=>x.booking_id===state.activeBookingId);
+  if(!b){
+    return `${screenHeader('ใบเสนอราคา')}
+      <div class="p-6 text-center text-sm text-[color:var(--ink)]/60">ยังไม่มีคำขอบริการ กรุณาเริ่มจากหน้า "หน้าแรก" เพื่อคำนวณราคาก่อน</div>`;
+  }
+  return `
+    ${screenHeader('ใบเสนอราคา', 'หมายเลขคำสั่งซื้อ #'+b.booking_id)}
+    <div class="p-4 space-y-4">
+      <div class="card p-4 space-y-2 text-sm">
+        <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ชื่อลูกค้า</span><span class="font-medium text-right">${b.customer_name}</span></div>
+        <div class="flex justify-between gap-3"><span class="text-[color:var(--ink)]/60 shrink-0">สถานที่ปฏิบัติงาน</span><span class="font-medium text-right">${b.work_address}</span></div>
+        <div class="flex justify-between pt-2 border-t" style="border-color:var(--line);"><span class="text-[color:var(--ink)]/60">บริการ</span><span class="font-medium">${b.service_type}</span></div>
+        <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">พื้นที่</span><span class="font-medium">${b.area_sqw} ตร.วา</span></div>
+        ${b.sched_date? `<div class="flex justify-between"><span class="text-[color:var(--ink)]/60">วันนัดหมาย</span><span class="font-medium">${fmtThaiDate(b.sched_date)}</span></div>`:''}
+        <div class="flex justify-between pt-2 border-t" style="border-color:var(--line);">
+          <span class="font-semibold">ยอดชำระ${b.months_paid>1? ` (${b.months_paid} เดือน)`:''}</span>
+          <span class="disp text-2xl font-semibold text-[color:var(--forest-deep)]">${b.price.toLocaleString()} ฿</span>
+        </div>
+        ${b.months_paid>1? `<p class="text-[11px] text-[color:var(--ink)]/50 text-right -mt-1">${b.monthly_unit_price.toLocaleString()} ฿ × ${b.months_paid} เดือน</p>`:''}
+      </div>
+      ${(b.booking_type==='Monthly' && b.job_status==='Pending_Payment') ? `
+        <div class="card p-4">
+          <p class="text-sm font-semibold mb-1">จ่ายล่วงหน้าได้หลายเดือน</p>
+          <p class="text-[11px] text-[color:var(--ink)]/50 mb-3">ไม่ต้องมาสแกนจ่ายทุกเดือน เลือกจำนวนเดือนที่ต้องการจ่ายล่วงหน้าได้เลย (ราคาต่อเดือนเท่าเดิม ไม่มีส่วนลด)</p>
+          <div class="grid grid-cols-4 gap-2">
+            ${[1,3,6,12].map(m=>`
+              <button class="py-2 rounded-lg text-sm font-semibold border ${b.months_paid===m? 'text-white':'text-[color:var(--forest)]'}" style="border-color:var(--line); background:${b.months_paid===m?'var(--forest)':'#fff'};" onclick="setQuoteMonths(${b.booking_id},${m})">${m} ด.</button>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+      <div class="qr-wrap flex flex-col items-center">
+        <p class="text-xs font-semibold mb-2 text-[color:var(--ink)]/60">สแกนเพื่อชำระผ่าน PromptPay</p>
+        ${qrMock()}
+        <p class="text-xs mt-2 text-[color:var(--ink)]/50">เข้ารหัสยอดเงินอัตโนมัติ ${b.price.toLocaleString()} บาท</p>
+      </div>
+      ${b.payment_verifying ? `
+        <div class="card p-5 flex flex-col items-center gap-2">
+          <div class="animate-spin" style="width:28px; height:28px; border:3px solid var(--line); border-top-color:var(--forest); border-radius:999px;"></div>
+          <p class="text-sm font-medium text-[color:var(--forest-deep)]">กำลังรอตรวจสอบการชำระเงิน...</p>
+          <p class="text-[11px] text-[color:var(--ink)]/50 text-center">ระบบกำลังตรวจสอบธุรกรรมกับธนาคารโดยอัตโนมัติ ไม่ต้องกดอะไรเพิ่ม</p>
+        </div>
+      ` : b.job_status==='Pending_Payment' ? `
+        <button class="btn-gold w-full" onclick="scanPay(${b.booking_id})">สแกนจ่ายแล้ว</button>
+      ` : `
+        <div class="text-center text-sm py-2 rounded-lg font-medium" style="background:var(--grass-soft); color:var(--forest);">✅ ชำระเงินแล้ว — เงินถูกพักไว้ใน Escrow</div>
+        <button class="btn-primary w-full" onclick="setPage('track')">ไปที่หน้าติดตามงาน →</button>
+      `}
+    </div>
+  `;
+}
+function qrMock(){
+  // simple deterministic pseudo-QR grid, purely decorative
+  let cells = '';
+  const seed = 7;
+  let x = seed;
+  for(let i=0;i<121;i++){
+    x = (x*1103515245+12345) % 2147483647;
+    const on = (x % 3 === 0) || [0,1,2,9,10,11,110,111,119,120].includes(i);
+    cells += `<div style="background:${on?'var(--forest-deep)':'transparent'}"></div>`;
+  }
+  return `<div style="display:grid; grid-template-columns:repeat(11,10px); grid-template-rows:repeat(11,10px); gap:1px; background:#fff; padding:8px; border:1px solid var(--line); border-radius:8px;">${cells}</div>`;
+}
+// customer taps "scanned & paid" — system then auto-verifies with the (mock) bank/payment gateway,
+// like waiting on a webhook, before confirming — no manual "confirm" step from the customer.
+// After payment, the job enters the open job pool (provider_id left null) for nearby providers
+// to claim on a first-come-first-served basis — no auto-assignment.
+function scanPay(bid){
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  b.payment_verifying = true;
+  renderAll();
+  setTimeout(()=>{
+    b.payment_verifying = false;
+    b.job_status = 'Paid_Searching';
+    b.provider_id = null;
+    b.pool_entered_at = new Date();
+    const gross = b.price;
+    DB.transactions.push({ transaction_id: bid*10+1, booking_id:bid, gross_amount:gross, platform_fee_amount:+(gross*0.2).toFixed(2), provider_payout_amount:+(gross*0.8).toFixed(2), escrow_status:'Held', withdrawn:false });
+    renderAll();
+  }, 2500);
+}
+/* ============================= CUSTOMER: PAGE 3 — ORDER TRACKING ============================= */
+const TRACK_STEPS = ['Paid_Searching','Matched','In_Progress','Submitted_Review','Completed'];
+function renderTrack(){
+  const b = DB.bookings.find(x=>x.booking_id===state.activeBookingId);
+  if(!b || b.job_status==='Pending_Payment'){
+    return `${screenHeader('ติดตามสถานะงาน')}
+      <div class="p-6 text-center text-sm text-[color:var(--ink)]/60">ยังไม่มีงานที่กำลังดำเนินการ กรุณาชำระเงินจากหน้าใบเสนอราคาก่อน</div>`;
+  }
+  const isWeather = b.job_status === 'Weather_Delay';
+  const isTimeout = b.job_status === 'Provider_Timeout';
+  const isCancelled = b.job_status === 'Cancelled_By_Customer';
+  const curIdx = TRACK_STEPS.indexOf(isWeather ? 'In_Progress' : (isTimeout ? 'Paid_Searching' : b.job_status));
+  return `
+    ${screenHeader('ติดตามสถานะงาน', 'คำสั่งซื้อ #'+b.booking_id)}
+    <div class="p-4 space-y-4">
+      ${isCancelled ? `
+        <div class="p-4 rounded-xl text-sm text-center" style="background:var(--danger-soft); color:var(--danger);">
+          ❌ งานนี้ถูกยกเลิกแล้ว — ระบบโอนเงินคืน ${b.price.toLocaleString()} บาทเรียบร้อยแล้ว
+        </div>
+      ` : `
+      <div class="card p-4">
+        <div class="flex items-center">
+          ${TRACK_STEPS.map((s,i)=>`
+            <div class="flex items-center ${i<TRACK_STEPS.length-1?'flex-1':''}">
+              <div class="step-dot ${i<curIdx?'done':(i===curIdx?'now':'')}">${i<curIdx?'✓':i+1}</div>
+              ${i<TRACK_STEPS.length-1? `<div class="step-line ${i<curIdx?'done':''}"></div>`:''}
+            </div>`).join('')}
+        </div>
+        <p class="text-center text-sm font-semibold mt-3 text-[color:var(--forest-deep)]">${isWeather? '⛈️ เลื่อนกำหนดการ (ฝนตก)' : (isTimeout? '🧍 ช่างไม่เคลื่อนไหว' : STATUS_TH[b.job_status])}</p>
+      </div>
+      ${isWeather ? `
+        <div class="p-3 rounded-xl text-sm" style="background:var(--rain-soft); color:var(--rain);">
+          ระบบตรวจพบสภาพอากาศฝนตกในพื้นที่ งานถูกเลื่อนอัตโนมัติเพื่อความปลอดภัยของช่าง
+        </div>
+        <button class="btn-primary w-full" onclick="rescheduleJob(${b.booking_id})">เลือกวันนัดใหม่ให้อัตโนมัติ</button>
+      ` : ''}
+      ${isTimeout ? `
+        <div class="p-3 rounded-xl text-sm flex items-center gap-2" style="background:var(--danger-soft); color:var(--danger);">
+          <div class="animate-spin" style="width:16px; height:16px; border:2px solid var(--danger); border-top-color:transparent; border-radius:999px; flex-shrink:0;"></div>
+          <span>ช่างคนเดิมไม่มีความเคลื่อนไหว ระบบกำลังจัดหาช่างคนใหม่ให้คุณอัตโนมัติ...</span>
+        </div>
+      ` : ''}
+      ${b.pending_adjustment ? `
+        <div class="card p-4" style="background:var(--gold-soft, #FFF7E0); border:1px solid var(--gold);">
+          <p class="text-sm font-semibold text-[color:var(--forest-deep)]">✋ ช่างขอปรับราคางานหน้างาน</p>
+          <div class="text-sm mt-2 space-y-1">
+            <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">พื้นที่</span><span class="font-medium">${b.area_sqw} → ${b.pending_adjustment.area} ตร.วา</span></div>
+            ${b.booking_type!=='Monthly' ? `<div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ความสูงหญ้า</span><span class="font-medium">${b.grass_height_level} → ${HEIGHT_NAMES[b.pending_adjustment.grassHeightCode]}</span></div>`:''}
+            ${b.pending_adjustment.debrisHours>0 ? `<div class="flex justify-between"><span class="text-[color:var(--ink)]/60">เคลียร์เศษวัสดุ/หิน</span><span class="font-medium">${b.pending_adjustment.debrisHours} ชม. (+${b.pending_adjustment.debrisFee.toLocaleString()} ฿)</span></div>`:''}
+            <div class="flex justify-between pt-2 border-t" style="border-color:var(--line);"><span class="text-[color:var(--ink)]/60">ราคาเดิม</span><span>${b.price.toLocaleString()} ฿</span></div>
+            <div class="flex justify-between"><span class="font-semibold">ราคาใหม่</span><span class="disp text-lg font-semibold text-[color:var(--forest-deep)]">${b.pending_adjustment.total.toLocaleString()} ฿</span></div>
+            ${b.pending_adjustment.total !== b.price ? `<div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ส่วนต่าง${b.pending_adjustment.total>b.price?'ที่ต้องจ่ายเพิ่ม':'ที่จะได้รับคืน'}</span><span class="font-semibold" style="color:${b.pending_adjustment.total>b.price?'var(--danger)':'var(--forest)'};">${Math.abs(b.pending_adjustment.total-b.price).toLocaleString()} ฿</span></div>`:''}
+          </div>
+          <div class="flex gap-2 mt-3">
+            <button class="flex-1 btn-outline" onclick="declinePriceAdjust(${b.booking_id})">ปฏิเสธ</button>
+            <button class="flex-1 btn-gold" onclick="startAdjustSettlement(${b.booking_id})">${b.pending_adjustment.total>b.price ? 'ยืนยันและจ่ายส่วนต่าง' : (b.pending_adjustment.total<b.price ? 'ยืนยันราคาใหม่' : 'ยืนยันราคาใหม่')}</button>
+          </div>
+        </div>
+      ` : ''}
+      ${b.topup_pending ? `
+        <div class="card p-4">
+          <p class="text-sm font-semibold text-[color:var(--forest-deep)] mb-2">ชำระส่วนต่างที่เพิ่มขึ้น</p>
+          <div class="qr-wrap flex flex-col items-center">
+            <p class="text-xs font-semibold mb-2 text-[color:var(--ink)]/60">สแกนเพื่อชำระผ่าน PromptPay</p>
+            ${qrMock()}
+            <p class="text-xs mt-2 text-[color:var(--ink)]/50">เข้ารหัสยอดเงินอัตโนมัติ ${b.topup_pending.amount.toLocaleString()} บาท</p>
+          </div>
+          ${b.topup_verifying ? `
+            <div class="p-5 flex flex-col items-center gap-2">
+              <div class="animate-spin" style="width:28px; height:28px; border:3px solid var(--line); border-top-color:var(--forest); border-radius:999px;"></div>
+              <p class="text-sm font-medium text-[color:var(--forest-deep)]">กำลังรอตรวจสอบการชำระเงิน...</p>
+            </div>
+          ` : `
+            <button class="btn-gold w-full mt-3" onclick="scanPayTopup(${b.booking_id})">สแกนจ่ายแล้ว</button>
+          `}
+        </div>
+      ` : ''}
+      ${b.refundAdjOpen ? refundAdjFormHtml(b) : ''}
+      <div class="card p-4 text-sm space-y-1">
+        <p class="font-semibold mb-1">ช่างที่รับผิดชอบ</p>
+        ${b.provider_id ? `<p>${providerName(b.provider_id)} · ⭐ ${providerRating(b.provider_id)}</p>` : `<p class="text-[color:var(--ink)]/60">🔍 กำลังส่งงานให้ช่างที่พร้อมให้บริการในพื้นที่ของคุณ กรุณารอสักครู่...</p>`}
+      </div>
+      ${b.job_status==='Matched' ? `
+        <button class="btn-outline w-full" onclick="simulateInactivityTracker(${b.booking_id})">🧍 จำลอง: ช่างไม่เคลื่อนไหว (Timeout)</button>
+        <p class="text-[11px] text-[color:var(--ink)]/50 -mt-2">ปุ่มนี้ไว้ทดสอบระบบตรวจจับความเคลื่อนไหวของช่างและการจับคู่ช่างใหม่อัตโนมัติ</p>
+      `:''}
+      ${(!isWeather && ['Matched','In_Progress'].includes(b.job_status)) ? `
+        <button class="btn-outline w-full" onclick="forceWeatherCheckByBooking(${b.booking_id})">🌦️ ตรวจสภาพอากาศวันนัดหมาย (จำลอง)</button>
+        <p class="text-[11px] text-[color:var(--ink)]/50 -mt-2">ระบบจะเช็คสภาพอากาศวันนัดหมายให้อัตโนมัติในวันจริง ปุ่มนี้ไว้ทดสอบผลตอนนี้เลย</p>
+        ${weatherCheckNote(b)}
+      `:''}
+      ${b.job_status==='In_Progress' ? `
+        <button class="btn-primary w-full" onclick="advanceStatus(${b.booking_id},'Submitted_Review')">จำลอง: ช่างส่งงานแล้ว</button>
+      `:''}
+      ${b.job_status==='Submitted_Review' ? `
+        <button class="btn-gold w-full" onclick="advanceStatus(${b.booking_id},'Completed')">ยืนยันรับงาน</button>
+      `:''}
+      ${b.job_status==='Completed' ? `
+        <button class="btn-gold w-full" onclick="setPage('review')">ให้คะแนนบริการ →</button>
+      `:''}
+      ${(b.job_status==='Completed' && b.months_paid>1) ? (
+        b.months_remaining>1 ? `
+        <div class="card p-4">
+          <p class="text-sm font-semibold">📦 แพ็กเกจจ่ายล่วงหน้า ${b.months_paid} เดือน</p>
+          <p class="text-[11px] text-[color:var(--ink)]/60 mt-1">เหลืออีก ${b.months_remaining-1} เดือน ระบบจะเปิดรอบบริการเดือนถัดไปให้อัตโนมัติ โดยไม่ต้องจ่ายเงินซ้ำ</p>
+          <button class="btn-outline w-full mt-3" onclick="advanceToNextMonth(${b.booking_id})">🗓️ จำลอง: เข้าสู่รอบบริการเดือนถัดไป</button>
+        </div>
+        ` : `
+        <div class="card p-4 text-center">
+          <p class="text-sm font-semibold">✅ ใช้บริการครบ ${b.months_paid} เดือนที่จ่ายไว้แล้ว</p>
+          <p class="text-[11px] text-[color:var(--ink)]/60 mt-1">ต้องการต่อแพ็กเกจ กรุณาไปที่หน้าแรกเพื่อสั่งซื้อรอบใหม่</p>
+        </div>
+        `
+      ) : ''}
+      ${['Paid_Searching','Matched','Provider_Timeout'].includes(b.job_status) ? (
+        state.cancelFlowOpen===b.booking_id ? cancelFlowFormHtml(b) : `
+        <button class="w-full text-sm font-semibold py-2.5 rounded-xl" style="color:var(--danger); background:var(--danger-soft);" onclick="openCancelFlow(${b.booking_id})">ยกเลิกงานและขอเงินคืน</button>
+      `) : ''}
+      `}
+    </div>
+  `;
+}
+function cancelFlowFormHtml(b){
+  const f = state.cancelForm;
+  const refund = refundAmountFor(b);
+  const isPartial = b.months_paid>1;
+  const usedMonths = b.months_paid - b.months_remaining;
+  const futureMonths = Math.max(0, b.months_remaining - 1);
+  return `
+    <div class="card p-4 space-y-2.5">
+      <p class="font-semibold text-sm text-[color:var(--forest-deep)]">ยกเลิกงาน #${b.booking_id} และขอเงินคืน ${refund.toLocaleString()} บาท</p>
+      ${isPartial ? `
+        <div class="text-[11px] text-[color:var(--ink)]/60 rounded-lg px-3 py-2" style="background:var(--paper-dim);">
+          แพ็กเกจนี้จ่ายล่วงหน้าไว้ ${b.months_paid} เดือน (${b.monthly_unit_price.toLocaleString()} ฿/เดือน) ใช้บริการไปแล้ว ${usedMonths} เดือน<br/>
+          คุณยังใช้บริการเดือนปัจจุบันได้จนครบรอบ จึงคืนเงินเฉพาะเดือนที่ยังไม่เริ่ม ${futureMonths} เดือน = ${b.monthly_unit_price.toLocaleString()} × ${futureMonths} = ${refund.toLocaleString()} บาท
+        </div>
+      ` : ''}
+      <p class="text-[11px] text-[color:var(--ink)]/60">กรอกบัญชีธนาคารที่ต้องการให้โอนเงินคืน ระบบจะปลดเงินจาก Escrow และโอนคืนให้อัตโนมัติ</p>
+      <input type="text" placeholder="ธนาคาร (เช่น กสิกรไทย)" value="${f.bankName}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateCancelForm('bankName', this.value)"/>
+      <input type="text" placeholder="เลขที่บัญชี" value="${f.accountNo}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateCancelForm('accountNo', this.value)"/>
+      <input type="text" placeholder="ชื่อบัญชี" value="${f.accountName}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateCancelForm('accountName', this.value)"/>
+      <div class="flex gap-2 pt-1">
+        <button class="flex-1 btn-outline" onclick="closeCancelFlow()">ยกเลิก</button>
+        <button class="flex-1 text-sm font-semibold py-2.5 rounded-xl text-white" style="background:var(--danger);" onclick="confirmCancelRefund(${b.booking_id})">ยืนยันคืนเงิน</button>
+      </div>
+    </div>
+  `;
+}
+function providerName(pid){ const p=DB.providers.find(x=>x.provider_id===pid); return p? p.provider_name : '—'; }
+function providerRating(pid){ const p=DB.providers.find(x=>x.provider_id===pid); return p? p.current_rating.toFixed(1) : '—'; }
+function weatherCheckNote(b){
+  const sch = DB.schedules.find(s=>s.booking_id===b.booking_id);
+  const chk = state.lastWeatherCheck;
+  if(!sch || !chk || chk.schedId !== sch.schedule_id) return '';
+  return chk.rain
+    ? `<div class="p-2.5 rounded-xl text-xs" style="background:var(--rain-soft); color:var(--rain);">☔ ตรวจพบฝนตกในพื้นที่ — ระบบเลื่อนงานและแจ้งเตือนทั้งคุณและช่างแล้ว</div>`
+    : `<div class="p-2.5 rounded-xl text-xs" style="background:var(--grass-soft); color:var(--forest);">☀️ สภาพอากาศแจ่มใส ไม่มีฝน งานดำเนินการตามปกติ</div>`;
+}
+function rescheduleJob(bid){
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  b.job_status = 'In_Progress';
+  const sch = DB.schedules.find(s=>s.booking_id===bid);
+  const newDate = new Date(); newDate.setDate(newDate.getDate()+2);
+  if(sch){ sch.schedule_status='Scheduled'; sch.scheduled_date=newDate; }
+  renderAll();
+}
+function advanceStatus(bid, status){
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  b.job_status = status;
+  if(status==='Submitted_Review'){
+    addBookingNotification(b, `ช่าง ${providerName(b.provider_id)} ส่งงาน #${bid} เรียบร้อยแล้ว กรุณาตรวจสอบและกดยืนยันรับงาน`);
+  }
+  if(status==='Completed'){
+    const sch = DB.schedules.find(s=>s.booking_id===bid);
+    if(sch) sch.schedule_status='Completed';
+    const tx = DB.transactions.find(t=>t.booking_id===bid);
+    if(tx) tx.escrow_status='Released';
+    if(b.provider_id) checkAutoWithdraw(b.provider_id);
+  }
+  renderAll();
+}
+// เปิดรอบบริการเดือนถัดไปของแพ็กเกจที่จ่ายล่วงหน้าไว้แล้ว — ไม่ต้องจ่ายเงินซ้ำ ใช้ช่างคนเดิมต่อเนื่อง
+function advanceToNextMonth(bid){
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  if(!b || b.months_remaining<=1) return;
+  b.months_remaining -= 1;
+  b.job_status = b.provider_id ? 'Matched' : 'Paid_Searching';
+  if(!b.provider_id) b.pool_entered_at = new Date();
+  if(b.sched_date){
+    const d = new Date(b.sched_date);
+    d.setMonth(d.getMonth()+1);
+    b.sched_date = d.toISOString().slice(0,10);
+  }
+  addBookingNotification(b, `เปิดรอบบริการเดือนถัดไปของแพ็กเกจ #${b.booking_id} แล้ว (เหลืออีก ${b.months_remaining-1} เดือนหลังจากนี้) ไม่มีการเรียกเก็บเงินซ้ำ`);
+  renderAll();
+}
+/* ============================= AUTO-WITHDRAW / PAYOUT SYSTEM ============================= */
+// เงินที่ปลดล็อกจาก Escrow แล้วแต่ยังไม่ถูกโอนออก (รอเบิก)
+function providerPendingBalance(pid){
+  return DB.transactions
+    .filter(t => !t.withdrawn && t.escrow_status==='Released' && DB.bookings.find(b=>b.booking_id===t.booking_id && b.provider_id===pid))
+    .reduce((s,t)=> s+t.provider_payout_amount, 0);
+}
+// เรียกทุกครั้งที่มีเงินถูกปลดล็อกจาก Escrow — เช็คว่าถึงเกณฑ์เบิกอัตโนมัติหรือยัง
+function checkAutoWithdraw(pid){
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  if(!p || !p.auto_withdraw_enabled) return;
+  const pending = providerPendingBalance(pid);
+  if(pending >= p.auto_withdraw_threshold && pending > 0){
+    processWithdraw(pid, 'Auto');
+  }
+}
+// ตัดยอดที่ Released แล้วทั้งหมดออกเป็นรายการเบิกเงินหนึ่งรายการ แล้ว "โอน" เข้าบัญชีช่าง
+function processWithdraw(pid, method){
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  const eligible = DB.transactions.filter(t => !t.withdrawn && t.escrow_status==='Released' && DB.bookings.find(b=>b.booking_id===t.booking_id && b.provider_id===pid));
+  const amount = eligible.reduce((s,t)=>s+t.provider_payout_amount,0);
+  if(amount <= 0) return null;
+  eligible.forEach(t=> t.withdrawn = true);
+  DB._payoutSeq++;
+  const payout = { payout_id: DB._payoutSeq, provider_id: pid, amount, method, bank_name:p.bank_name, bank_account_no:p.bank_account_no, status:'โอนสำเร็จ', created_at:new Date() };
+  DB.payouts.push(payout);
+  return payout;
+}
+function manualWithdraw(pid){
+  const result = processWithdraw(pid, 'Manual');
+  renderAll();
+}
+function toggleAutoWithdraw(pid){
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  p.auto_withdraw_enabled = !p.auto_withdraw_enabled;
+  if(p.auto_withdraw_enabled) checkAutoWithdraw(pid);
+  renderAll();
+}
+function updateThreshold(pid, val){
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  p.auto_withdraw_threshold = Math.max(0, Number(val)||0);
+}
+function checkThresholdNow(pid){
+  checkAutoWithdraw(pid);
+  renderAll();
+}
+/* ============================= PROVIDER INACTIVITY TIMEOUT & AUTO-REMATCH ============================= */
+// จำลองระบบตรวจจับว่าช่างที่ถูกจับคู่แล้วไม่มีความเคลื่อนไหว (ไม่กดรับงาน/ไม่เริ่มงานตามเวลา)
+// ระบบจะเปลี่ยนสถานะเป็น Provider_Timeout แจ้งเตือนทั้งสองฝ่าย แล้วพยายามจับคู่ช่างคนใหม่ให้อัตโนมัติ
+function simulateInactivityTracker(bookingId) {
+  const b = DB.bookings.find(x => x.booking_id === bookingId);
+  if (!b || b.job_status !== 'Matched') return;
+
+  const oldProviderId = b.provider_id;
+  b.job_status = 'Provider_Timeout';
+
+  addBookingNotification(b, `งาน #${b.booking_id} ถูกเปลี่ยนสถานะเนื่องจากช่างไม่มีความเคลื่อนไหว ระบบกำลังจัดหาช่างคนใหม่ให้คุณ`);
+  renderAll();
+
+  // ค้นหาช่างคนใหม่ที่ยัง Active อยู่ (ตัวอย่าง: เปลี่ยนไปเป็นช่างคนอื่นที่ว่าง)
+  setTimeout(() => {
+    const nextProvider = DB.providers.find(p => p.provider_id !== oldProviderId && p.account_status === 'Active');
+    if (nextProvider) {
+      b.provider_id = nextProvider.provider_id;
+      b.job_status = 'Matched';
+      const sch = DB.schedules.find(s => s.booking_id === bookingId);
+      if(sch) sch.provider_id = nextProvider.provider_id;
+
+      addBookingNotification(b, `ระบบได้จับคู่ช่างคนใหม่ (${nextProvider.provider_name}) ให้กับงาน #${b.booking_id} ของคุณแล้ว`);
+      renderAll();
+    }
+  }, 3000); // จำลองการหาช่างใหม่ภายใน 3 วินาที
+}
+/* ============================= CANCEL & AUTO-REFUND ============================= */
+function openCancelFlow(bookingId){
+  state.cancelFlowOpen = bookingId;
+  state.cancelForm = { bankName:'', accountNo:'', accountName: state.calc.customerName || (DB.users[0].first_name+' '+DB.users[0].last_name) };
+  renderAll();
+}
+function closeCancelFlow(){
+  state.cancelFlowOpen = null;
+  renderAll();
+}
+function updateCancelForm(field, val){
+  // update quietly without a full re-render, so focus/cursor position is preserved
+  state.cancelForm[field] = val;
+}
+function customerCancelAndRefund(bookingId, bankName, accountNo, accountName) {
+  const b = DB.bookings.find(x => x.booking_id === bookingId);
+  if (!b) return;
+  const refund = refundAmountFor(b);
+
+  // 1. เปลี่ยนสถานะงานเป็นยกเลิก
+  b.job_status = 'Cancelled_By_Customer';
+
+  // 2. ปรับปรุงตารางงานช่างให้ว่าง
+  const sch = DB.schedules.find(s => s.booking_id === bookingId);
+  if (sch) sch.schedule_status = 'Weather_Cancelled'; // ใช้สถานะหยุดทำงาน
+
+  // 3. ปลดล็อกเงินจาก Escrow คืนลูกค้าอัตโนมัติ (คืนเฉพาะส่วนที่ยังไม่ได้ใช้บริการ)
+  const tx = DB.transactions.find(t => t.booking_id === bookingId);
+  if (tx) {
+    tx.escrow_status = 'Refunded';
+
+    // บันทึกประวัติการโอนเงินคืนอัตโนมัติ เข้าตาราง payouts (ประยุกต์ใช้)
+    DB._payoutSeq++;
+    DB.payouts.push({
+      payout_id: DB._payoutSeq,
+      provider_id: 'CUSTOMER_REFUND',
+      amount: refund,
+      method: 'Auto-Refund',
+      bank_name: bankName,
+      bank_account_no: accountNo,
+      status: 'โอนเงินคืนสำเร็จ',
+      created_at: new Date()
+    });
+  }
+
+  addBookingNotification(b, `งาน #${b.booking_id} ถูกยกเลิกแล้ว ระบบโอนเงินคืน ${refund.toLocaleString()} บาท เข้าบัญชี ${bankName} (${accountNo}) เรียบร้อย`);
+
+  state.cancelFlowOpen = null;
+  state.page.customer = 'home'; // ส่งกลับหน้าแรก
+  renderAll();
+}
+function confirmCancelRefund(bookingId){
+  const f = state.cancelForm;
+  if(!f.bankName || !f.accountNo || !f.accountName){
+    alert('กรุณากรอกข้อมูลบัญชีสำหรับรับเงินคืนให้ครบก่อนดำเนินการ');
+    return;
+  }
+  customerCancelAndRefund(bookingId, f.bankName, f.accountNo, f.accountName);
+}
+/* ============================= CUSTOMER: PAGE 4 — REVIEW & RATING ============================= */
+function renderReview(){
+  const b = DB.bookings.find(x=>x.booking_id===state.activeBookingId);
+  const already = b ? DB.reviews.find(r=>r.booking_id===b.booking_id) : null;
+  if(!b || b.job_status!=='Completed'){
+    return `${screenHeader('ให้คะแนนบริการ')}
+      <div class="p-6 text-center text-sm text-[color:var(--ink)]/60">รีวิวจะเปิดให้ทำหลังงานเสร็จสมบูรณ์เท่านั้น</div>`;
+  }
+  if(already){
+    return `${screenHeader('ขอบคุณสำหรับรีวิว 🌿')}
+      <div class="p-4 space-y-3">
+        <div class="card p-4 text-sm">
+          <div class="text-lg mb-1">${'★'.repeat(already.rating_stars)}${'☆'.repeat(5-already.rating_stars)}</div>
+          <p class="text-[color:var(--ink)]/80">${already.customer_comment}</p>
+          <div class="flex gap-1.5 flex-wrap mt-2">${already.extracted_tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>
+        </div>
+        <div class="p-3 rounded-xl text-sm font-medium" style="background:${already.ai_sentiment_result==='Positive'?'var(--grass-soft)':already.ai_sentiment_result==='Negative'?'var(--danger-soft)':'var(--paper-dim)'}; color:${already.ai_sentiment_result==='Positive'?'var(--forest)':already.ai_sentiment_result==='Negative'?'var(--danger)':'var(--ink)'}">
+          AI Sentiment: ${already.ai_sentiment_result}
+        </div>
+      </div>`;
+  }
+  return `
+    ${screenHeader('ให้คะแนนบริการ', providerName(b.provider_id))}
+    <div class="p-4 space-y-4">
+      <div class="card p-4 text-center">
+        <p class="text-sm text-[color:var(--ink)]/60 mb-2">คุณพอใจบริการแค่ไหน?</p>
+        <div id="stars">${[1,2,3,4,5].map(i=>`<span class="star ${i<=state.reviewStars?'on':''}" onclick="setStars(${i})">★</span>`).join('')}</div>
+      </div>
+      <textarea id="reviewText" rows="4" placeholder="เล่าประสบการณ์ของคุณ..." class="w-full p-3 rounded-xl border text-sm" style="border-color:var(--line);"></textarea>
+      <button class="btn-gold w-full" onclick="submitReview(${b.booking_id})">ส่งรีวิว</button>
+    </div>
+  `;
+}
+function setStars(n){ state.reviewStars = n; renderAll(); }
+function submitReview(bid){
+  const text = document.getElementById('reviewText').value || '(ไม่มีความคิดเห็นเพิ่มเติม)';
+  const stars = state.reviewStars || 5;
+  const { result, tags } = analyzeSentiment(text);
+  DB.reviews.push({ review_id: DB.reviews.length+1, booking_id:bid, rating_stars:stars, customer_comment:text, ai_sentiment_result:result, extracted_tags: tags.length?tags:['ทั่วไป'] });
+  const p = DB.providers.find(x=>x.provider_id===DB.bookings.find(b=>b.booking_id===bid).provider_id);
+  if(p){ p.current_rating = +(((p.current_rating*10)+stars)/11).toFixed(2); }
+  state.reviewStars = 0;
+  renderAll();
+}
+/* ============================= CUSTOMER: PAGE — MY ACCOUNT (phone & service addresses) ============================= */
+function renderProfile(){
+  const u = DB.users[0];
+  const e = state.profileEdit;
+  return `
+    ${screenHeader('บัญชีของฉัน', 'แก้ไขเบอร์โทร และจัดการที่อยู่สำหรับให้บริการ')}
+    <div class="p-4 space-y-4">
+      <div class="card p-4">
+        <p class="text-sm font-semibold mb-2">เบอร์โทรศัพท์</p>
+        ${e.phoneEditing ? `
+          <input type="tel" value="${e.phoneDraft}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updatePhoneDraft(this.value)" placeholder="08x-xxx-xxxx"/>
+          <div class="flex gap-2 mt-2">
+            <button class="flex-1 btn-outline" onclick="cancelEditPhone()">ยกเลิก</button>
+            <button class="flex-1 btn-gold" onclick="savePhone()">บันทึก</button>
+          </div>
+        ` : `
+          <div class="flex justify-between items-center">
+            <p class="text-sm">${u.phone_number}</p>
+            <button class="text-xs font-semibold" style="color:var(--forest);" onclick="startEditPhone()">แก้ไข</button>
+          </div>
+        `}
+      </div>
+
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <p class="text-sm font-semibold">ที่อยู่สำหรับให้บริการ</p>
+          ${!e.addAddressOpen ? `<button class="text-xs font-semibold" style="color:var(--forest);" onclick="startAddAddress()">+ เพิ่มที่อยู่</button>` : ''}
+        </div>
+        <div class="space-y-2">
+          ${u.addresses.map(a=>`
+            <div class="card p-3">
+              <div class="flex justify-between items-start gap-2">
+                <div>
+                  <p class="text-sm font-medium">${a.label} ${a.is_default? `<span class="tag-chip ml-1" style="background:var(--grass-soft); color:var(--forest);">ค่าเริ่มต้น</span>`:''}</p>
+                  <p class="text-[11px] text-[color:var(--ink)]/60 mt-0.5">📍 ${a.address}</p>
+                </div>
+              </div>
+              <div class="flex gap-2 mt-2">
+                ${!a.is_default? `<button class="text-[11px] font-semibold" style="color:var(--forest);" onclick="setDefaultAddress('${a.address_id}')">ตั้งเป็นค่าเริ่มต้น</button>`:''}
+                <button class="text-[11px] font-semibold ml-auto" style="color:var(--danger);" onclick="deleteAddress('${a.address_id}')">ลบ</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        ${e.addAddressOpen ? `
+          <div class="card p-4 mt-2 space-y-2">
+            <input type="text" placeholder="ป้ายชื่อที่อยู่ (เช่น บ้าน, คอนโด, ออฟฟิศ)" value="${e.newAddress.label}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateNewAddressField('label', this.value)"/>
+            <textarea placeholder="ที่อยู่เต็ม" rows="2" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateNewAddressField('address', this.value)">${e.newAddress.address}</textarea>
+            <div class="flex gap-2 pt-1">
+              <button class="flex-1 btn-outline" onclick="cancelAddAddress()">ยกเลิก</button>
+              <button class="flex-1 btn-gold" onclick="saveNewAddress()">บันทึกที่อยู่</button>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+}
+function startEditPhone(){ state.profileEdit.phoneEditing = true; state.profileEdit.phoneDraft = DB.users[0].phone_number; renderAll(); }
+function cancelEditPhone(){ state.profileEdit.phoneEditing = false; renderAll(); }
+function updatePhoneDraft(val){ state.profileEdit.phoneDraft = val; } // quiet update, no re-render, keeps cursor position
+function savePhone(){
+  const val = (state.profileEdit.phoneDraft||'').trim();
+  if(!val){ alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+  DB.users[0].phone_number = val;
+  state.profileEdit.phoneEditing = false;
+  renderAll();
+}
+function startAddAddress(){ state.profileEdit.addAddressOpen = true; state.profileEdit.newAddress = { label:'', address:'' }; renderAll(); }
+function cancelAddAddress(){ state.profileEdit.addAddressOpen = false; renderAll(); }
+function updateNewAddressField(field, val){ state.profileEdit.newAddress[field] = val; } // quiet update
+function saveNewAddress(){
+  const { label, address } = state.profileEdit.newAddress;
+  if(!label.trim() || !address.trim()){ alert('กรุณากรอกป้ายชื่อและที่อยู่ให้ครบ'); return; }
+  DB._addressSeq = (DB._addressSeq||0) + 1;
+  const isFirst = DB.users[0].addresses.length === 0;
+  DB.users[0].addresses.push({ address_id:'A'+(100+DB._addressSeq), label:label.trim(), address:address.trim(), is_default:isFirst });
+  if(isFirst) DB.users[0].default_address = address.trim();
+  state.profileEdit.addAddressOpen = false;
+  renderAll();
+}
+function setDefaultAddress(id){
+  const list = DB.users[0].addresses;
+  list.forEach(a=> a.is_default = (a.address_id===id));
+  const chosen = list.find(a=>a.address_id===id);
+  if(chosen) DB.users[0].default_address = chosen.address;
+  renderAll();
+}
+function deleteAddress(id){
+  const list = DB.users[0].addresses;
+  if(list.length <= 1){ alert('ต้องมีที่อยู่สำหรับให้บริการอย่างน้อย 1 แห่ง ไม่สามารถลบที่อยู่สุดท้ายได้'); return; }
+  const wasDefault = list.find(a=>a.address_id===id)?.is_default;
+  DB.users[0].addresses = list.filter(a=>a.address_id!==id);
+  if(wasDefault && DB.users[0].addresses.length){
+    DB.users[0].addresses[0].is_default = true;
+    DB.users[0].default_address = DB.users[0].addresses[0].address;
+  }
+  renderAll();
+}
+/* ============================= MECHANIC: PAGE — OPEN JOB POOL ============================= */
+// deterministic mock distance (km) from provider's base location to a job — for demo purposes,
+// since customer addresses aren't geocoded to lat/lng in this mockup
+function mockDistanceKm(bookingId, providerId){
+  const h = weatherHash(bookingId + '|' + providerId + '|dist');
+  return +(1 + (h/100)*18).toFixed(1); // ~1.0–19.0 km, deterministic per job+provider
+}
+// VIP early-access window: newly paid jobs are visible/claimable ONLY by VIP providers
+// for this many seconds after entering the pool; after that they open up to everyone.
+const VIP_EARLY_ACCESS_SECONDS = 30;
+function jobPoolAccess(booking, providerId){
+  const p = DB.providers.find(x=>x.provider_id===providerId);
+  const enteredAt = booking.pool_entered_at ? new Date(booking.pool_entered_at).getTime() : 0;
+  const elapsed = (Date.now() - enteredAt) / 1000;
+  const remaining = Math.max(0, Math.ceil(VIP_EARLY_ACCESS_SECONDS - elapsed));
+  const vipWindowActive = remaining > 0;
+  const locked = vipWindowActive && !p.is_vip; // non-VIP can't see/claim it yet
+  return { locked, vipWindowActive, remaining, isVip: !!p.is_vip };
+}
+function renderJobPool(){
+  const pid = state.currentProvider;
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  const openJobs = DB.bookings
+    .filter(b=> b.job_status==='Paid_Searching' && !b.provider_id)
+    .map(b=> ({ b, dist: mockDistanceKm(b.booking_id, pid), access: jobPoolAccess(b, pid) }))
+    .sort((a,z)=> a.dist - z.dist);
+  const visibleJobs = openJobs.filter(x=> !x.access.locked);
+  const hiddenCount = openJobs.length - visibleJobs.length;
+  return `
+    ${screenHeader('งานใหม่ในพื้นที่', `รัศมีบริการของคุณ ${p.service_radius_km} กม. · พบ ${visibleJobs.length} งาน${p.is_vip? ' · 🏅 คุณเป็นช่าง VIP เห็นงานก่อนใคร':''}`)}
+    <div class="p-4 space-y-3">
+      ${visibleJobs.length===0 ? `<p class="text-sm text-[color:var(--ink)]/50 text-center py-8">ยังไม่มีงานใหม่ในขณะนี้ ระบบจะแจ้งเตือนทันทีที่มีงานเข้ามา</p>` : visibleJobs.map(({b,dist,access})=>{
+        const inRange = dist <= p.service_radius_km;
+        return `
+        <div class="card p-4 ${inRange? '' : 'opacity-50'}">
+          ${access.vipWindowActive ? `
+            <div class="flex items-center gap-1.5 mb-2 text-[11px] font-semibold" style="color:var(--gold);">
+              <span>🏅 สิทธิ์ VIP ก่อนใคร</span>
+              <span class="text-[color:var(--ink)]/50 font-normal">· ช่างทั่วไปจะเห็นงานนี้ในอีก ${access.remaining} วิ</span>
+            </div>
+          ` : ''}
+          <div class="flex justify-between items-start gap-2">
+            <div>
+              <p class="font-semibold text-sm">#${b.booking_id} · ${b.service_type}</p>
+              <p class="text-[11px] text-[color:var(--ink)]/60 mt-0.5">📍 ${b.work_address || '-'}</p>
+            </div>
+            <span class="tag-chip shrink-0" style="${inRange? '' : 'background:var(--danger-soft); color:var(--danger);'}">${dist} กม.</span>
+          </div>
+          <div class="flex justify-between text-sm mt-3 pt-3 border-t" style="border-color:var(--line);">
+            <span class="text-[color:var(--ink)]/60">พื้นที่ ${b.area_sqw} ตร.วา${b.grass_height_level && b.grass_height_level!=='-' ? ' · หญ้าสูง '+b.grass_height_level : ''}</span>
+            <span class="font-semibold">${b.sched_date? fmtThaiDate(b.sched_date) : 'ไม่ระบุวัน'}</span>
+          </div>
+          ${b.photo ? `
+            <div class="flex items-center gap-2 mt-2">
+              <img src="${b.photo}" class="w-12 h-12 object-cover rounded-lg border" style="border-color:var(--line);" />
+              <p class="text-[11px] text-[color:var(--ink)]/60">📎 มีรูปสนามหญ้าจากลูกค้า</p>
+            </div>
+          ` : ''}
+          <div class="flex justify-between items-center mt-3 pt-3 border-t" style="border-color:var(--line);">
+            <div>
+              <p class="text-[11px] text-[color:var(--ink)]/50">ช่างจะได้รับ (80%)</p>
+              <p class="disp text-lg font-semibold text-[color:var(--forest-deep)]">${Math.round(b.price*0.8).toLocaleString()} ฿</p>
+            </div>
+            ${inRange
+              ? `<button class="btn-gold px-5" onclick="acceptJob(${b.booking_id})">รับงานนี้</button>`
+              : `<span class="text-[11px]" style="color:var(--danger);">เกินรัศมีบริการ</span>`}
+          </div>
+        </div>
+      `;}).join('')}
+      ${hiddenCount>0 ? `
+        <div class="card p-3 text-center text-[11px] text-[color:var(--ink)]/50" style="background:var(--paper-dim); border-style:dashed;">
+          🔒 มีอีก ${hiddenCount} งานที่กำลังอยู่ในช่วงสิทธิ์ VIP ก่อนใคร จะเปิดให้ช่างทั่วไปเร็วๆ นี้
+        </div>
+      `:''}
+    </div>
+  `;
+}
+function acceptJob(bid){
+  const pid = state.currentProvider;
+  const b = DB.bookings.find(x=>x.booking_id===bid);
+  if(!b || b.provider_id){ renderAll(); return; } // already taken by another provider — first-come-first-served
+  const access = jobPoolAccess(b, pid);
+  if(access.locked){ renderAll(); return; } // still inside VIP-only window and this provider isn't VIP
+  b.provider_id = pid;
+  b.job_status = 'Matched';
+  addBookingNotification(b, `งาน #${b.booking_id} จับคู่กับช่าง ${providerName(pid)} แล้ว กำลังเตรียมเข้าให้บริการ`);
+  state.page.mechanic = 'dashboard';
+  renderAll();
+}
+/* ============================= MECHANIC: PAGE 5 — DASHBOARD & WALLET ============================= */
+// Real turn-by-turn navigation: hands off to Google Maps, which geocodes the actual
+// customer address and the mechanic's live GPS position for accurate real-world routing.
+function startNavigation(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(!job || !job.work_address) return;
+  const p = DB.providers.find(x=>x.provider_id===job.provider_id);
+  const dest = encodeURIComponent(job.work_address);
+  const openMaps = (originParam) => {
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${originParam}&destination=${dest}&travelmode=driving`;
+    window.open(url, '_blank');
+  };
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      pos => openMaps(`${pos.coords.latitude},${pos.coords.longitude}`),           // ตำแหน่ง GPS จริงของช่างตอนนี้
+      ()   => openMaps(encodeURIComponent(p ? p.base_address : '')),                // ถ้าไม่ได้รับสิทธิ์ GPS ใช้ที่อยู่ฐานของช่างแทน
+      { enableHighAccuracy:true, timeout:6000 }
+    );
+  } else {
+    openMaps(encodeURIComponent(p ? p.base_address : ''));
+  }
+}
+function renderDashboard(){
+  const pid = state.currentProvider;
+  const p = DB.providers.find(x=>x.provider_id===pid);
+  const myTx = DB.transactions.filter(t=> DB.bookings.find(b=>b.booking_id===t.booking_id && b.provider_id===pid));
+  const gross = myTx.reduce((s,t)=>s+t.gross_amount,0);
+  const fee = myTx.reduce((s,t)=>s+t.platform_fee_amount,0);
+  const heldTx = myTx.filter(t=>t.escrow_status==='Held');
+  const pending = providerPendingBalance(pid);
+  const myPayouts = DB.payouts.filter(x=>x.provider_id===pid).sort((a,b)=>b.payout_id-a.payout_id);
+  const totalWithdrawn = myPayouts.reduce((s,x)=>s+x.amount,0);
+  const myJobs = DB.bookings.filter(b=>b.provider_id===pid && !['Completed','Cancelled_By_Customer'].includes(b.job_status))
+    .slice()
+    .sort((a,z)=>{
+      if(!a.sched_date && !z.sched_date) return 0;
+      if(!a.sched_date) return 1;  // ไม่ระบุวันนัด → ไปท้ายสุด
+      if(!z.sched_date) return -1;
+      return new Date(a.sched_date) - new Date(z.sched_date);
+    });
+  return `
+    ${screenHeader('สวัสดี ' + p.provider_name, p.is_vip? '🏅 ช่าง VIP · เรตติ้ง '+p.current_rating.toFixed(1) : 'เรตติ้ง '+p.current_rating.toFixed(1))}
+    <div class="p-4 space-y-4">
+      <div class="card p-4" style="background:var(--forest); color:#fff; border:none;">
+        <p class="text-xs text-white/70 mb-1">ยอดรอเบิก (ปลดจาก Escrow แล้ว)</p>
+        <p class="disp text-3xl font-semibold">${pending.toLocaleString()} ฿</p>
+        <div class="flex justify-between text-xs text-white/70 mt-3 pt-3 border-t border-white/20">
+          <span>รายได้รวม ${gross.toLocaleString()} ฿</span>
+          <span>ค่าธรรมเนียมแพลตฟอร์ม 20% = ${fee.toLocaleString()} ฿</span>
+        </div>
+        ${pending>0 ? `<button class="btn-gold w-full mt-3" onclick="manualWithdraw('${pid}')">เบิกเงินตอนนี้ (Manual)</button>` : `<p class="text-white/60 text-xs mt-3">ยังไม่มียอดที่พร้อมเบิกในขณะนี้</p>`}
+      </div>
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-1">
+          <div>
+            <p class="text-sm font-semibold">ระบบเบิกเงินอัตโนมัติ</p>
+            <p class="text-[11px] text-[color:var(--ink)]/60">โอนเข้าบัญชีอัตโนมัติทันทีที่ยอดรอเบิกถึงเกณฑ์</p>
+          </div>
+          <button role="switch" aria-checked="${p.auto_withdraw_enabled}" onclick="toggleAutoWithdraw('${pid}')"
+            class="pill" style="width:44px; height:26px; background:${p.auto_withdraw_enabled?'var(--forest)':'var(--line)'}; position:relative; flex-shrink:0;">
+            <span style="position:absolute; top:2px; left:${p.auto_withdraw_enabled?'20px':'2px'}; width:22px; height:22px; border-radius:999px; background:#fff; transition:left .15s ease;"></span>
+          </button>
+        </div>
+        <div class="flex items-center gap-2 mt-3">
+          <span class="text-xs text-[color:var(--ink)]/60 shrink-0">เบิกอัตโนมัติเมื่อยอดถึง</span>
+          <input type="number" value="${p.auto_withdraw_threshold}" min="0" step="100"
+            class="w-full px-2 py-1.5 rounded-lg border text-sm" style="border-color:var(--line);"
+            oninput="updateThreshold('${pid}', this.value)" onchange="checkThresholdNow('${pid}')"/>
+          <span class="text-xs text-[color:var(--ink)]/60">฿</span>
+        </div>
+        <p class="text-[11px] text-[color:var(--ink)]/50 mt-2">โอนเข้า ${p.bank_name} เลขบัญชี ${p.bank_account_no}</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="card p-3 text-center">
+          <p class="disp text-xl font-semibold text-[color:var(--forest-deep)]">${heldTx.length}</p>
+          <p class="text-[11px] text-[color:var(--ink)]/60">รายการเงินพักไว้ (Escrow)</p>
+        </div>
+        <div class="card p-3 text-center">
+          <p class="disp text-xl font-semibold text-[color:var(--forest-deep)]">${totalWithdrawn.toLocaleString()}</p>
+          <p class="text-[11px] text-[color:var(--ink)]/60">เบิกไปแล้วสะสม (฿)</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">ประวัติการเบิกเงิน</p>
+        <div class="space-y-2">
+          ${myPayouts.length ? myPayouts.map(x=>`
+            <div class="card p-3 flex justify-between items-center text-sm">
+              <div>
+                <p class="font-medium">${x.amount.toLocaleString()} ฿ ${x.method==='Auto'?'⚡ อัตโนมัติ':'🖐️ ด้วยตนเอง'}</p>
+                <p class="text-[11px] text-[color:var(--ink)]/60">${x.bank_name} ${x.bank_account_no} · ${new Date(x.created_at).toLocaleDateString('th-TH')}</p>
+              </div>
+              <span class="tag-chip">${x.status}</span>
+            </div>
+          `).join('') : `<p class="text-sm text-[color:var(--ink)]/50">ยังไม่มีประวัติการเบิกเงิน</p>`}
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">งานของฉัน</p>
+        <div class="space-y-2">
+          ${myJobs.length? myJobs.map(j=>`
+            <div class="card p-3 text-sm">
+              <div class="flex justify-between items-center">
+                <p class="font-medium">#${j.booking_id} · ${j.service_type}</p>
+                <span class="tag-chip">${j.price? j.price.toLocaleString()+' ฿':''}</span>
+              </div>
+              <p class="text-[11px] text-[color:var(--ink)]/60 mt-1">${j.area_sqw} ตร.วา · ความสูงหญ้า: ${j.grass_height_level || '-'} · ${STATUS_TH[j.job_status]}</p>
+              <p class="text-[11px] font-medium mt-0.5" style="color:var(--forest);">📅 วันนัดหมาย: ${j.sched_date ? fmtThaiDate(j.sched_date) : 'ไม่ระบุวันนัด'}</p>
+              ${j.photo ? `
+                <div class="flex items-center gap-2 mt-2">
+                  <img src="${j.photo}" class="w-14 h-14 object-cover rounded-lg border" style="border-color:var(--line);" />
+                  <p class="text-[11px] text-[color:var(--ink)]/60">📎 รูปสนามหญ้าจากลูกค้า — ดูสภาพหน้างานก่อนเริ่มงานได้เลย</p>
+                </div>
+              ` : ''}
+              <div class="mt-2 pt-2 border-t space-y-1" style="border-color:var(--line);">
+                <p class="text-[11px] font-semibold text-[color:var(--ink)]/70">ข้อมูลติดต่อลูกค้า</p>
+                <p class="text-[11px] text-[color:var(--ink)]/70">👤 ${customerNameOf(j)}</p>
+                <p class="text-[11px] text-[color:var(--ink)]/70">📍 ${customerAddressOf(j)}</p>
+                <div class="flex items-center gap-2">
+                  <p class="text-[11px] text-[color:var(--ink)]/70">📞 ${customerPhoneOf(j)}</p>
+                  <a href="tel:${customerPhoneOf(j).replace(/[^0-9+]/g,'')}" class="text-[11px] font-semibold underline" style="color:var(--forest);">โทรหาลูกค้า</a>
+                </div>
+              </div>
+              <button class="btn-gold w-full mt-2 text-xs py-2" onclick="startNavigation(${j.booking_id})">🧭 เริ่มนำทางไปบ้านลูกค้า (Google Maps)</button>
+            </div>
+          `).join('') : `<p class="text-sm text-[color:var(--ink)]/50">ยังไม่มีงานที่กำลังดำเนินการ</p>`}
+        </div>
+      </div>
+    </div>
+  `;
+}
+/* ============================= MECHANIC: PAGE 6 — MONTHLY WORK SCHEDULE ============================= */
+function buildCalendarGrid(year, month, dayInfoFn, onClickName, filterStatus){
+  const first = new Date(year, month, 1);
+  const startDow = first.getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const weekday = ['อา','จ','อ','พ','พฤ','ศ','ส'];
+  let cells = '';
+  for(let i=0;i<startDow;i++) cells += `<div></div>`;
+  for(let d=1; d<=daysInMonth; d++){
+    const info = dayInfoFn(d);
+    const dotColor = info.status ? SCHED_COLOR[info.status] : null;
+    const dim = filterStatus && filterStatus!=='All' && info.status && info.status!==filterStatus;
+    cells += `<div class="cal-cell" style="background:${info.count? 'var(--paper-dim)':'transparent'}; opacity:${dim?0.3:1}" onclick="${onClickName}(${d})">
+        <span style="font-weight:${info.count?700:400};">${d}</span>
+        ${dotColor? `<div class="dot" style="background:${dotColor}"></div>`:''}
+      </div>`;
+  }
+  return `
+    <div class="grid grid-cols-7 gap-1 text-center text-[11px] text-[color:var(--ink)]/50 mb-1">
+      ${weekday.map(w=>`<div>${w}</div>`).join('')}
+    </div>
+    <div class="grid grid-cols-7 gap-1">${cells}</div>
+  `;
+}
+function monthLabel(year, month){
+  const names = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  return `${names[month]} ${year+543}`;
+}
+function renderSchedule(){
+  const pid = state.currentProvider;
+  const mySched = DB.schedules.filter(s=>s.provider_id===pid);
+  const dayInfo = d => {
+    const items = mySched.filter(s=> s.scheduled_date.getFullYear()===state.calYear && s.scheduled_date.getMonth()===state.calMonth && s.scheduled_date.getDate()===d);
+    return { count:items.length, status: items[0]?.schedule_status };
+  };
+  const dayItems = state.selectedDay ? mySched.filter(s=> s.scheduled_date.getFullYear()===state.calYear && s.scheduled_date.getMonth()===state.calMonth && s.scheduled_date.getDate()===state.selectedDay) : [];
+  return `
+    ${screenHeader('ตารางงานประจำเดือน', providerName(pid))}
+    <div class="p-4 space-y-4">
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-3">
+          <button class="text-sm px-2" onclick="shiftMonth(-1)">‹</button>
+          <p class="font-semibold text-sm">${monthLabel(state.calYear, state.calMonth)}</p>
+          <button class="text-sm px-2" onclick="shiftMonth(1)">›</button>
+        </div>
+        ${buildCalendarGrid(state.calYear, state.calMonth, dayInfo, 'selectDay')}
+        <div class="flex gap-3 mt-3 text-[11px] text-[color:var(--ink)]/60">
+          <span><span class="dot inline-block" style="background:var(--grass)"></span> นัดหมาย</span>
+          <span><span class="dot inline-block" style="background:var(--forest)"></span> เสร็จแล้ว</span>
+          <span><span class="dot inline-block" style="background:var(--rain)"></span> เลื่อนเพราะฝน</span>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">${state.selectedDay? `งานวันที่ ${state.selectedDay} ${monthLabel(state.calYear,state.calMonth)}` : 'แตะวันที่เพื่อดูรายละเอียด'}</p>
+        <div class="space-y-2">
+          ${dayItems.map(s=>{
+            const b = DB.bookings.find(x=>x.booking_id===s.booking_id);
+            return `
+            <div class="card p-3 text-sm">
+              <div class="flex justify-between items-center">
+                <p class="font-medium">#${s.booking_id} · ${b? b.service_type:''}</p>
+                <span class="tag-chip" style="background:${SCHED_COLOR[s.schedule_status]}22; color:${SCHED_COLOR[s.schedule_status]}">${s.schedule_status}</span>
+              </div>
+              <p class="text-[11px] text-[color:var(--ink)]/60 mt-1">ช่วงเวลา: ${s.time_slot}</p>
+              ${s.schedule_status==='Scheduled' ? `<button class="btn-outline w-full mt-2 text-xs py-1.5" onclick="forceWeatherCheck(${s.schedule_id})">🌦️ ตรวจสภาพอากาศวันนัดหมาย (จำลอง)</button>`:''}
+              ${state.lastWeatherCheck && state.lastWeatherCheck.schedId===s.schedule_id ? `
+                <p class="text-[11px] mt-1.5" style="color:${state.lastWeatherCheck.rain?'var(--rain)':'var(--forest)'}">${state.lastWeatherCheck.rain? '☔ ตรวจพบฝนตก — เลื่อนงานและแจ้งเตือนแล้ว':'☀️ ไม่มีฝน งานดำเนินการตามปกติ'}</p>
+              `:''}
+            </div>`;
+          }).join('') || `<p class="text-sm text-[color:var(--ink)]/50">ไม่มีงานในวันนี้</p>`}
+        </div>
+      </div>
+    </div>
+  `;
+}
+function shiftMonth(delta){
+  state.calMonth += delta;
+  if(state.calMonth<0){ state.calMonth=11; state.calYear--; }
+  if(state.calMonth>11){ state.calMonth=0; state.calYear++; }
+  state.selectedDay=null;
+  renderAll();
+}
+function selectDay(d){ state.selectedDay=d; renderAll(); }
+/* ============================= MECHANIC: PAGE 7 — AI INSPECTION UPLOAD ============================= */
+const DEBRIS_RATE_PER_HOUR = 200;
+function recalcOnSitePrice(job, area, grassCode, debrisHours){
+  let base;
+  if(job.booking_type==='Monthly'){
+    base = calcMonthly(job.monthly_freq, area).price;
+  } else {
+    base = calcOneTime(job.service_type_id, area, grassCode).total;
+  }
+  const debrisFee = Math.max(0, Number(debrisHours)||0) * DEBRIS_RATE_PER_HOUR;
+  return { base, debrisFee, total: base + debrisFee };
+}
+function priceAdjustBlock(job){
+  if(job.pending_adjustment){
+    const pa = job.pending_adjustment;
+    return `<div class="card p-4" style="background:var(--gold-soft, #FFF7E0); border:1px solid var(--gold);">
+        <p class="text-sm font-semibold" style="color:var(--forest-deep);">⏳ ส่งคำขอปรับราคาแล้ว รอลูกค้ายืนยัน</p>
+        <p class="text-[11px] text-[color:var(--ink)]/60 mt-1">ราคาใหม่ที่เสนอ ${pa.total.toLocaleString()} ฿ (เดิม ${job.price.toLocaleString()} ฿)</p>
+      </div>`;
+  }
+  const canAdjust = job.booking_type==='Monthly' ? (job.monthly_freq!=null) : (job.service_type_id!=null);
+  if(!canAdjust){
+    return `<p class="text-[11px] text-[color:var(--ink)]/40 text-center">งานนี้ไม่มีข้อมูลราคาต้นทางสำหรับคำนวณใหม่ (ข้อมูลเก่า)</p>`;
+  }
+  if(!state.mechAdjustOpen){
+    return `<button class="btn-outline w-full" onclick="openPriceAdjust(${job.booking_id})">✋ ขอปรับราคา</button>`;
+  }
+  const f = state.mechAdjustForm;
+  const showHeight = job.booking_type!=='Monthly';
+  const r = recalcOnSitePrice(job, f.area, f.grassHeightCode, f.debrisHours);
+  const diff = r.total - job.price;
+  return `<div class="card p-4 space-y-3">
+      <p class="text-sm font-semibold text-[color:var(--forest-deep)]">ขอปรับราคา — งาน #${job.booking_id}</p>
+
+      <div>
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">1. พื้นที่สนามหญ้าจริง (ตร.วา)</label>
+        <input id="adjArea" type="number" min="1" value="${f.area}" class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateAdjustForm('area', this.value)"/>
+        <p class="text-[11px] text-[color:var(--ink)]/50 mt-0.5">ลูกค้าระบุไว้ ${job.area_sqw} ตร.วา</p>
+      </div>
+
+      ${showHeight ? `
+      <div>
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">2. ความสูงของหญ้าจริง</label>
+        <select class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="updateAdjustForm('grassHeightCode', this.value)">
+          <option value="low" ${f.grassHeightCode==='low'?'selected':''}>น้อยกว่า 6 นิ้ว (×1.0)</option>
+          <option value="mid" ${f.grassHeightCode==='mid'?'selected':''}>มากกว่า 6 นิ้ว (×1.5)</option>
+          <option value="high" ${f.grassHeightCode==='high'?'selected':''}>มากกว่า 12 นิ้ว (×2.0)</option>
+        </select>
+        <p class="text-[11px] text-[color:var(--ink)]/50 mt-0.5">ลูกค้าระบุไว้ "${job.grass_height_level}"</p>
+      </div>
+      `:''}
+
+      <div>
+        <label class="text-xs font-semibold text-[color:var(--ink)]/60">3. เศษวัสดุ/หินที่ต้องเคลียร์เพิ่ม (ชั่วโมง)</label>
+        <input id="adjDebris" type="number" min="0" step="0.5" value="${f.debrisHours}" class="w-full mt-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateAdjustForm('debrisHours', this.value)"/>
+        <p class="text-[11px] text-[color:var(--ink)]/50 mt-0.5">คิดเพิ่มชั่วโมงละ ${DEBRIS_RATE_PER_HOUR} บาท</p>
+      </div>
+
+      <div class="pt-2 border-t text-sm space-y-1" style="border-color:var(--line);">
+        <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ราคาเดิม</span><span class="font-medium">${job.price.toLocaleString()} ฿</span></div>
+        <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ราคาใหม่ (ประเมิน ณ หน้างาน)</span><span class="font-semibold text-[color:var(--forest-deep)]">${r.total.toLocaleString()} ฿</span></div>
+        <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ส่วนต่าง</span><span class="font-semibold" style="color:${diff>0?'var(--danger)':(diff<0?'var(--forest)':'inherit')};">${diff>0?'+':''}${diff.toLocaleString()} ฿</span></div>
+      </div>
+
+      <div class="flex gap-2">
+        <button class="flex-1 btn-outline" onclick="closePriceAdjust()">ยกเลิก</button>
+        <button class="flex-1 btn-gold" onclick="submitPriceAdjust(${job.booking_id})">ส่งคำขอให้ลูกค้ายืนยัน</button>
+      </div>
+    </div>`;
+}
+function openPriceAdjust(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  state.mechAdjustOpen = true;
+  state.mechAdjustForm = { area: job.area_sqw, grassHeightCode: job.grass_height_code || 'low', debrisHours: job.debris_hours || 0 };
+  renderAll();
+}
+function closePriceAdjust(){ state.mechAdjustOpen = false; renderAll(); }
+function updateAdjustForm(field, val){
+  state.mechAdjustForm[field] = (field==='grassHeightCode') ? val : Number(val)||0;
+  renderAll(); // re-render to update the live price preview
+  if(field==='area' || field==='debrisHours'){
+    const id = field==='area' ? 'adjArea' : 'adjDebris';
+    setTimeout(()=>{ const inp=document.getElementById(id); if(inp){ inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); } }, 0);
+  }
+}
+function submitPriceAdjust(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  const f = state.mechAdjustForm;
+  const r = recalcOnSitePrice(job, f.area, f.grassHeightCode, f.debrisHours);
+  job.pending_adjustment = {
+    area: f.area, grassHeightCode: f.grassHeightCode, debrisHours: f.debrisHours,
+    base: r.base, debrisFee: r.debrisFee, total: r.total,
+  };
+  DB._adjSeq++;
+  DB.price_adjustments.push({
+    adj_id: DB._adjSeq, booking_id: job.booking_id, provider_id: job.provider_id,
+    old_area: job.area_sqw, new_area: f.area,
+    old_price: job.price, new_price: r.total, debris_hours: f.debrisHours, debris_fee: r.debrisFee,
+    status: 'Pending', requested_at: new Date(), resolved_at: null,
+  });
+  addBookingNotification(job, `ช่าง ${providerName(job.provider_id)} ขอปรับราคางาน #${job.booking_id} เป็น ${r.total.toLocaleString()} บาท (เดิม ${job.price.toLocaleString()} บาท) กรุณายืนยันหรือปฏิเสธ`);
+  state.mechAdjustOpen = false;
+  renderAll();
+}
+function latestPendingAdjustment(bid){
+  return DB.price_adjustments.filter(a=>a.booking_id===bid && a.status==='Pending').sort((a,z)=>z.adj_id-a.adj_id)[0];
+}
+// applies the pending adjustment's field changes to the booking once payment/refund is settled,
+// tops up (or trims) the held escrow to match the new price, and closes out the audit record
+function finalizeApprovedAdjustment(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(!job || !job.pending_adjustment) return;
+  const pa = job.pending_adjustment;
+  const oldPrice = job.price;
+  job.area_sqw = pa.area;
+  if(job.booking_type!=='Monthly'){
+    job.grass_height_code = pa.grassHeightCode;
+    job.grass_height_level = HEIGHT_NAMES[pa.grassHeightCode] || job.grass_height_level;
+  }
+  job.debris_hours = pa.debrisHours;
+  job.debris_fee = pa.debrisFee;
+  job.price = pa.total;
+  job.monthly_unit_price = pa.total; // ถ้าเป็นแพ็กเกจ ราคาต่อเดือนใหม่มีผลกับรอบถัดไปด้วย
+  job.pending_adjustment = null;
+  job.topup_pending = null;
+  job.refundAdjOpen = false;
+  // เงินใน Escrow ต้องสะท้อนราคาใหม่เสมอ ไม่ว่าจะเพิ่มหรือลด
+  const tx = DB.transactions.find(t=>t.booking_id===bid);
+  if(tx){
+    tx.gross_amount = pa.total;
+    tx.platform_fee_amount = +(pa.total*0.2).toFixed(2);
+    tx.provider_payout_amount = +(pa.total*0.8).toFixed(2);
+  }
+  const rec = latestPendingAdjustment(bid);
+  if(rec){ rec.status = 'Approved'; rec.resolved_at = new Date(); }
+  addProviderNotification(job, `ลูกค้ายืนยันราคาใหม่ของงาน #${job.booking_id} แล้ว (${job.price.toLocaleString()} บาท)${pa.total!==oldPrice? (pa.total>oldPrice? ' ได้รับชำระส่วนต่างเรียบร้อย':' คืนเงินส่วนต่างให้ลูกค้าเรียบร้อย') : ''}`);
+  renderAll();
+}
+// ราคาใหม่สูงกว่าเดิม → ต้องให้ลูกค้าจ่ายส่วนต่างก่อน ถึงจะยืนยันราคาใหม่ได้จริง
+// ราคาใหม่ต่ำกว่าเดิม → คืนเงินส่วนต่างทันที (ต้องกรอกบัญชีธนาคาร เหมือนตอนยกเลิกงาน)
+// ราคาเท่าเดิม (พบยาก) → ยืนยันได้เลยไม่ต้องมีขั้นตอนการเงินเพิ่ม
+function startAdjustSettlement(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(!job || !job.pending_adjustment) return;
+  const diff = job.pending_adjustment.total - job.price;
+  if(diff > 0){
+    job.topup_pending = { amount: diff };
+    renderAll();
+  } else if(diff < 0){
+    job.refundAdjOpen = true;
+    state.refundAdjForm = { bankName:'', accountNo:'', accountName: state.calc.customerName || (DB.users[0].first_name+' '+DB.users[0].last_name) };
+    renderAll();
+  } else {
+    finalizeApprovedAdjustment(bid);
+  }
+}
+function scanPayTopup(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(!job || !job.topup_pending) return;
+  job.topup_verifying = true;
+  renderAll();
+  setTimeout(()=>{
+    job.topup_verifying = false;
+    finalizeApprovedAdjustment(bid);
+  }, 2000);
+}
+function refundAdjFormHtml(b){
+  const f = state.refundAdjForm;
+  const refundAmt = b.price - b.pending_adjustment.total;
+  return `
+    <div class="card p-4 space-y-2.5">
+      <p class="font-semibold text-sm text-[color:var(--forest-deep)]">คืนเงินส่วนต่าง ${refundAmt.toLocaleString()} บาท</p>
+      <p class="text-[11px] text-[color:var(--ink)]/60">ราคาใหม่ต่ำกว่าราคาเดิม ระบบจะคืนเงินส่วนต่างเข้าบัญชีที่ระบุทันที</p>
+      <input type="text" placeholder="ธนาคาร (เช่น กสิกรไทย)" value="${f.bankName}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateRefundAdjForm('bankName', this.value)"/>
+      <input type="text" placeholder="เลขที่บัญชี" value="${f.accountNo}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateRefundAdjForm('accountNo', this.value)"/>
+      <input type="text" placeholder="ชื่อบัญชี" value="${f.accountName}" class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" oninput="updateRefundAdjForm('accountName', this.value)"/>
+      <div class="flex gap-2 pt-1">
+        <button class="flex-1 btn-outline" onclick="closeRefundAdjForm(${b.booking_id})">ยกเลิก</button>
+        <button class="flex-1 btn-gold" onclick="confirmRefundAdj(${b.booking_id})">ยืนยันรับเงินคืน</button>
+      </div>
+    </div>
+  `;
+}
+function updateRefundAdjForm(field, val){ state.refundAdjForm[field] = val; } // quiet update
+function closeRefundAdjForm(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(job) job.refundAdjOpen = false;
+  renderAll();
+}
+function confirmRefundAdj(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  const f = state.refundAdjForm;
+  if(!f.bankName || !f.accountNo || !f.accountName){
+    alert('กรุณากรอกข้อมูลบัญชีสำหรับรับเงินคืนให้ครบก่อนดำเนินการ');
+    return;
+  }
+  const refundAmt = job.price - job.pending_adjustment.total;
+  DB._payoutSeq++;
+  DB.payouts.push({
+    payout_id: DB._payoutSeq, provider_id:'CUSTOMER_REFUND', amount: refundAmt, method:'Auto-Refund',
+    bank_name: f.bankName, bank_account_no: f.accountNo, status:'โอนเงินคืนสำเร็จ', created_at: new Date(),
+  });
+  finalizeApprovedAdjustment(bid);
+}
+function declinePriceAdjust(bid){
+  const job = DB.bookings.find(x=>x.booking_id===bid);
+  if(!job || !job.pending_adjustment) return;
+  addProviderNotification(job, `ลูกค้าปฏิเสธคำขอปรับราคาของงาน #${job.booking_id} ราคาคงเดิมที่ ${job.price.toLocaleString()} บาท`);
+  job.pending_adjustment = null;
+  const rec = latestPendingAdjustment(bid);
+  if(rec){ rec.status = 'Declined'; rec.resolved_at = new Date(); }
+  renderAll();
+}
+function renderInspect(){
+  const pid = state.currentProvider;
+  const eligible = DB.bookings.filter(b=>b.provider_id===pid && ['In_Progress','Matched'].includes(b.job_status));
+  const job = eligible.find(b=>b.booking_id===state.mechSelectedJobId) || eligible[0];
+  if(job && !state.mechSelectedJobId) state.mechSelectedJobId = job.booking_id;
+  return `
+    ${screenHeader('ตรวจงานด้วย AI', 'อัปโหลดภาพก่อน–หลัง')}
+    <div class="p-4 space-y-4">
+      ${eligible.length>1 ? `
+        <select class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="state.mechSelectedJobId=Number(this.value); state.aiResult=null; state.mechAdjustOpen=false; renderAll();">
+          ${eligible.map(j=>`<option value="${j.booking_id}" ${job&&job.booking_id===j.booking_id?'selected':''}>#${j.booking_id} · ${j.service_type}</option>`).join('')}
+        </select>
+      `:''}
+      ${!job ? `<p class="text-sm text-[color:var(--ink)]/50 text-center py-6">ไม่มีงานที่พร้อมตรวจสอบในขณะนี้</p>` : `
+        <div class="grid grid-cols-2 gap-3">
+          <div class="card p-3 text-center">
+            <div class="h-24 rounded-lg mb-2 flex items-center justify-center overflow-hidden" style="background:var(--paper-dim);">
+              ${job.photo ? `<img src="${job.photo}" class="w-full h-full object-cover" />` : '📷'}
+            </div>
+            <p class="text-[11px] text-[color:var(--ink)]/60">${job.photo ? 'ภาพจากลูกค้า (ก่อนตัดหญ้า)' : 'ภาพก่อนตัดหญ้า'}</p>
+          </div>
+          <label class="card p-3 text-center cursor-pointer">
+            <div class="h-24 rounded-lg mb-2 flex items-center justify-center" style="background:var(--grass-soft);" id="afterPreview">📤</div>
+            <p class="text-[11px] text-[color:var(--ink)]/60" id="afterLabel">แตะเพื่ออัปโหลดภาพหลังตัด</p>
+            <input type="file" accept="image/*" class="hidden" onchange="handleAfterPhoto(this)"/>
+          </label>
+        </div>
+        ${priceAdjustBlock(job)}
+        <button class="btn-outline w-full" onclick="runAI()">▶ เริ่มวิเคราะห์ด้วย AI</button>
+        ${state.aiResult ? `
+          <div class="card p-4 text-sm">
+            <p class="font-semibold mb-2 text-[color:var(--forest-deep)]">ผลการวิเคราะห์</p>
+            <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ความสูงหญ้าที่ตรวจพบ</span><span class="font-medium">${state.aiResult.height}</span></div>
+            <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">คุณภาพงาน</span><span class="font-medium">${state.aiResult.quality}</span></div>
+            <div class="flex justify-between"><span class="text-[color:var(--ink)]/60">ความมั่นใจ</span><span class="font-medium">${state.aiResult.confidence}%</span></div>
+          </div>
+          <button class="btn-gold w-full" onclick="completeInspection(${job.booking_id})">✅ ส่งงาน & ปิดงาน</button>
+        `:''}
+      `}
+    </div>
+  `;
+}
+function handleAfterPhoto(input){
+  const label = document.getElementById('afterLabel');
+  const preview = document.getElementById('afterPreview');
+  if(input.files && input.files[0]){
+    label.textContent = input.files[0].name;
+    preview.textContent = '✅';
+  }
+}
+function runAI(){
+  const heights = ['น้อยกว่า 6 นิ้ว','มากกว่า 6 นิ้ว'];
+  const qualities = ['ดีเยี่ยม','ดี','ควรปรับปรุงขอบสนาม'];
+  state.aiResult = {
+    height: heights[Math.floor(Math.random()*heights.length)],
+    quality: qualities[Math.floor(Math.random()*qualities.length)],
+    confidence: 88 + Math.floor(Math.random()*11),
+  };
+  renderAll();
+}
+function completeInspection(bid){
+  advanceStatus(bid, 'Completed');
+  state.aiResult = null;
+  state.mechSelectedJobId = null;
+  renderAll();
+}
+/* ============================= ADMIN: PAGE 8 — CONTROL CENTER ============================= */
+function renderControl(){
+  const totalBookings = DB.bookings.length;
+  const gmv = DB.transactions.reduce((s,t)=>s+t.gross_amount,0);
+  const escrowHeld = DB.transactions.filter(t=>t.escrow_status==='Held').reduce((s,t)=>s+t.gross_amount,0);
+  const activeProviders = DB.providers.filter(p=>p.account_status==='Active').length;
+  const avgRating = (DB.providers.reduce((s,p)=>s+p.current_rating,0)/DB.providers.length).toFixed(2);
+  const sentCounts = { Positive:0, Neutral:0, Negative:0 };
+  DB.reviews.forEach(r=> sentCounts[r.ai_sentiment_result]++);
+  const totalRev = DB.reviews.length || 1;
+  const adj = DB.price_adjustments;
+  const adjPending = adj.filter(a=>a.status==='Pending');
+  const adjApproved = adj.filter(a=>a.status==='Approved');
+  const adjDeclined = adj.filter(a=>a.status==='Declined');
+  const adjNetValue = adjApproved.reduce((s,a)=> s + (a.new_price - a.old_price), 0);
+  return `
+    ${screenHeader('ศูนย์ควบคุมระบบ', 'ภาพรวมทั้งแพลตฟอร์ม')}
+    <div class="p-4 space-y-4">
+      <div class="grid grid-cols-2 gap-3">
+        ${metricCard('คำสั่งซื้อทั้งหมด', totalBookings, '')}
+        ${metricCard('GMV', gmv.toLocaleString(), '฿')}
+        ${metricCard('เงินพักไว้ (Escrow)', escrowHeld.toLocaleString(), '฿')}
+        ${metricCard('ช่างที่ Active', activeProviders, `/${DB.providers.length}`)}
+      </div>
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-1">
+          <p class="text-sm font-semibold">เรตติ้งเฉลี่ยของช่าง</p>
+          <p class="disp text-lg font-semibold text-[color:var(--forest-deep)]">${avgRating} ⭐</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">คำขอปรับราคาหน้างาน</p>
+        <div class="grid grid-cols-3 gap-2 mb-3">
+          ${metricCard('รอดำเนินการ', adjPending.length, '')}
+          ${metricCard('อนุมัติแล้ว', adjApproved.length, '')}
+          ${metricCard('ปฏิเสธ', adjDeclined.length, '')}
+        </div>
+        <div class="card p-3 flex justify-between items-center text-sm mb-3">
+          <span class="text-[color:var(--ink)]/60">มูลค่าสุทธิจากรายการที่อนุมัติแล้ว</span>
+          <span class="font-semibold" style="color:${adjNetValue>=0?'var(--forest-deep)':'var(--danger)'};">${adjNetValue>=0?'+':''}${adjNetValue.toLocaleString()} ฿</span>
+        </div>
+        ${adj.length===0 ? `<p class="text-[11px] text-[color:var(--ink)]/40 text-center py-3">ยังไม่มีการขอปรับราคา</p>` : `
+          <div class="space-y-2">
+            ${adj.slice().sort((a,z)=>z.adj_id-a.adj_id).map(a=>{
+              const statusColor = a.status==='Pending' ? 'var(--gold)' : (a.status==='Approved' ? 'var(--forest)' : 'var(--danger)');
+              const statusTh = a.status==='Pending' ? 'รอดำเนินการ' : (a.status==='Approved' ? 'อนุมัติแล้ว' : 'ปฏิเสธ');
+              const diff = a.new_price - a.old_price;
+              return `
+              <div class="card p-3">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <p class="text-sm font-medium">งาน #${a.booking_id} · ${providerName(a.provider_id)}</p>
+                    <p class="text-[11px] text-[color:var(--ink)]/60 mt-0.5">พื้นที่ ${a.old_area} → ${a.new_area} ตร.วา${a.debris_hours>0? ` · เคลียร์เศษวัสดุ ${a.debris_hours} ชม.`:''}</p>
+                  </div>
+                  <span class="tag-chip shrink-0" style="background:${statusColor}22; color:${statusColor};">${statusTh}</span>
+                </div>
+                <div class="flex justify-between items-center mt-2 pt-2 border-t text-sm" style="border-color:var(--line);">
+                  <span class="text-[color:var(--ink)]/60">${a.old_price.toLocaleString()} ฿ → ${a.new_price.toLocaleString()} ฿</span>
+                  <span class="font-semibold" style="color:${diff>0?'var(--danger)':'var(--forest)'};">${diff>0?'+':''}${diff.toLocaleString()} ฿</span>
+                </div>
+              </div>
+            `;}).join('')}
+          </div>
+        `}
+      </div>
+      <div class="card p-4">
+        <p class="text-sm font-semibold mb-2">AI Sentiment จากรีวิว</p>
+        ${['Positive','Neutral','Negative'].map(k=>{
+          const pct = Math.round((sentCounts[k]/totalRev)*100);
+          const color = k==='Positive'?'var(--forest)':k==='Negative'?'var(--danger)':'var(--gold)';
+          return `<div class="mb-2">
+            <div class="flex justify-between text-[11px] text-[color:var(--ink)]/60 mb-0.5"><span>${k}</span><span>${sentCounts[k]}</span></div>
+            <div class="w-full h-2 rounded-full" style="background:var(--paper-dim);"><div class="h-2 rounded-full" style="width:${pct}%; background:${color};"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">ช่างในระบบ</p>
+        <div class="space-y-2">
+          ${DB.providers.map(p=>`
+            <div class="card p-3 flex justify-between items-center text-sm">
+              <div>
+                <p class="font-medium">${p.provider_name} ${p.is_vip?'🏅':''}</p>
+                <p class="text-[11px] text-[color:var(--ink)]/60">${p.account_status} · รัศมี ${p.service_radius_km} กม.</p>
+              </div>
+              <span class="tag-chip">⭐ ${p.current_rating.toFixed(1)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+function metricCard(label, value, suffix){
+  return `<div class="card p-3">
+    <p class="disp text-xl font-semibold text-[color:var(--forest-deep)]">${value}<span class="text-xs font-normal">${suffix}</span></p>
+    <p class="text-[11px] text-[color:var(--ink)]/60 mt-0.5">${label}</p>
+  </div>`;
+}
+/* ============================= ADMIN: PAGE — CUSTOMERS BY TYPE ============================= */
+function customerNameOf(b){
+  if(b.customer_name) return b.customer_name;
+  const u = DB.users.find(x=>x.user_id===b.user_id);
+  return u ? `${u.first_name} ${u.last_name}` : '—';
+}
+function customerAddressOf(b){
+  if(b.work_address) return b.work_address;
+  const u = DB.users.find(x=>x.user_id===b.user_id);
+  return (u && u.default_address) || '—';
+}
+function customerPhoneOf(b){
+  if(b.customer_phone) return b.customer_phone;
+  const u = DB.users.find(x=>x.user_id===b.user_id);
+  return (u && u.phone_number) || '—';
+}
+function bookingPrice(b){
+  if(typeof b.price === 'number') return b.price;
+  const tx = DB.transactions.find(t=>t.booking_id===b.booking_id);
+  return tx ? tx.gross_amount : 0;
+}
+// Rolling-cycle policy: ลูกค้าใช้บริการเดือนปัจจุบัน (ที่กำลังดำเนินอยู่) จนครบเดือนเสมอ ไม่มีการตัดคืนเป็นรายวัน
+// คืนเงินเฉพาะ "เดือนที่ยังไม่เริ่มเลย" ในแพ็กเกจที่จ่ายล่วงหน้ามากกว่า 1 เดือนเท่านั้น
+// ถ้าเป็นงานจ่ายครั้งเดียว/แพ็กเกจเดือนเดียว (months_paid<=1) ที่ยังไม่เริ่มงาน ยังคงคืนเต็มจำนวนตามเดิม
+function refundAmountFor(b){
+  if(typeof b.months_remaining === 'number' && typeof b.monthly_unit_price === 'number'){
+    if(b.months_paid > 1){
+      const futureMonthsNotStarted = Math.max(0, b.months_remaining - 1); // ไม่นับเดือนปัจจุบันที่กำลังใช้อยู่
+      return b.monthly_unit_price * futureMonthsNotStarted;
+    }
+    return b.monthly_unit_price * b.months_remaining;
+  }
+  return bookingPrice(b);
+}
+function setAdminCustomerTab(tab){ state.adminCustomerTab = tab; renderAll(); }
+function renderCustomers(){
+  const tab = state.adminCustomerTab; // 'onetime' | 'monthly'
+  const filtered = DB.bookings.filter(b => tab==='onetime' ? b.booking_type==='One-time' : b.booking_type==='Monthly');
+  // group bookings by customer (user_id), so each customer appears once with their order history
+  const groups = {};
+  filtered.forEach(b=>{
+    const key = b.user_id;
+    if(!groups[key]) groups[key] = { user_id:key, name: customerNameOf(b), address: customerAddressOf(b), bookings: [] };
+    groups[key].bookings.push(b);
+  });
+  const customers = Object.values(groups).sort((a,z)=> a.name.localeCompare(z.name,'th'));
+  return `
+    ${screenHeader('ลูกค้าตามประเภท', `${customers.length} รายชื่อ · ${filtered.length} คำสั่งซื้อ`)}
+    <div class="p-4 space-y-4">
+      <div class="flex gap-2">
+        <button class="flex-1 py-2 text-sm font-semibold rounded-xl ${tab==='onetime'?'text-white':'text-[color:var(--forest)]'}" style="background:${tab==='onetime'?'var(--forest)':'var(--grass-soft)'}" onclick="setAdminCustomerTab('onetime')">จ่ายครั้งเดียว</button>
+        <button class="flex-1 py-2 text-sm font-semibold rounded-xl ${tab==='monthly'?'text-white':'text-[color:var(--forest)]'}" style="background:${tab==='monthly'?'var(--forest)':'var(--grass-soft)'}" onclick="setAdminCustomerTab('monthly')">แพ็กเกจรายเดือน</button>
+      </div>
+      ${customers.length===0 ? `<p class="text-sm text-[color:var(--ink)]/50 text-center py-8">ยังไม่มีลูกค้าประเภทนี้</p>` : customers.map(cu=>{
+        const totalSpent = cu.bookings.reduce((s,b)=> s + bookingPrice(b), 0);
+        return `
+        <div class="card p-4">
+          <div class="flex justify-between items-start gap-2">
+            <div>
+              <p class="font-semibold text-sm">${cu.name}</p>
+              <p class="text-[11px] text-[color:var(--ink)]/60 mt-0.5">📍 ${cu.address}</p>
+            </div>
+            <span class="tag-chip shrink-0">${cu.bookings.length} คำสั่งซื้อ</span>
+          </div>
+          <div class="mt-3 pt-3 border-t space-y-1.5" style="border-color:var(--line);">
+            ${cu.bookings.slice().sort((a,z)=> z.booking_id-a.booking_id).map(b=>`
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="text-[color:var(--ink)]/70 truncate pr-2">#${b.booking_id} · ${b.service_type}</span>
+                <span class="tag-chip shrink-0">${STATUS_TH[b.job_status]||b.job_status}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="flex justify-between items-center mt-3 pt-3 border-t" style="border-color:var(--line);">
+            <span class="text-[11px] text-[color:var(--ink)]/50">ยอดใช้จ่ายสะสม</span>
+            <span class="disp text-base font-semibold text-[color:var(--forest-deep)]">${totalSpent.toLocaleString()} ฿</span>
+          </div>
+        </div>
+      `;}).join('')}
+    </div>
+  `;
+}
+/* ============================= ADMIN: PAGE 9 — MASTER MONTHLY OPERATIONS CALENDAR ============================= */
+function renderOpsCalendar(){
+  const dayInfo = d => {
+    const items = DB.schedules.filter(s=> s.scheduled_date.getFullYear()===state.calYear && s.scheduled_date.getMonth()===state.calMonth && s.scheduled_date.getDate()===d && (state.adminFilter==='All' || s.schedule_status===state.adminFilter));
+    return { count:items.length, status: items[0]?.schedule_status };
+  };
+  const dayItems = state.selectedDay ? DB.schedules.filter(s=> s.scheduled_date.getFullYear()===state.calYear && s.scheduled_date.getMonth()===state.calMonth && s.scheduled_date.getDate()===state.selectedDay) : [];
+  return `
+    ${screenHeader('ปฏิทินปฏิบัติการรวม', 'งานของช่างทุกคน')}
+    <div class="p-4 space-y-4">
+      <select class="w-full px-3 py-2 rounded-lg border text-sm" style="border-color:var(--line);" onchange="state.adminFilter=this.value; renderAll();">
+        <option value="All" ${state.adminFilter==='All'?'selected':''}>ทุกสถานะ</option>
+        <option value="Scheduled" ${state.adminFilter==='Scheduled'?'selected':''}>นัดหมายแล้ว</option>
+        <option value="Completed" ${state.adminFilter==='Completed'?'selected':''}>เสร็จสมบูรณ์</option>
+        <option value="Weather_Cancelled" ${state.adminFilter==='Weather_Cancelled'?'selected':''}>เลื่อนเพราะฝน</option>
+      </select>
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-3">
+          <button class="text-sm px-2" onclick="shiftMonth(-1)">‹</button>
+          <p class="font-semibold text-sm">${monthLabel(state.calYear, state.calMonth)}</p>
+          <button class="text-sm px-2" onclick="shiftMonth(1)">›</button>
+        </div>
+        ${buildCalendarGrid(state.calYear, state.calMonth, dayInfo, 'selectDay', state.adminFilter)}
+      </div>
+      <div>
+        <p class="text-sm font-semibold mb-2">${state.selectedDay? `งานวันที่ ${state.selectedDay}`:'แตะวันที่เพื่อดูรายละเอียด'}</p>
+        <div class="space-y-2">
+          ${dayItems.map(s=>{
+            const b = DB.bookings.find(x=>x.booking_id===s.booking_id);
+            return `<div class="card p-3 flex justify-between items-center text-sm">
+              <div>
+                <p class="font-medium">#${s.booking_id} · ${providerName(s.provider_id)}</p>
+                <p class="text-[11px] text-[color:var(--ink)]/60">${b? b.service_type:''} · ${s.time_slot}</p>
+              </div>
+              <span class="tag-chip" style="background:${SCHED_COLOR[s.schedule_status]}22; color:${SCHED_COLOR[s.schedule_status]}">${s.schedule_status}</span>
+            </div>`;
+          }).join('') || `<p class="text-sm text-[color:var(--ink)]/50">ไม่มีงานในวันนี้</p>`}
+        </div>
+      </div>
+    </div>
+  `;
+}
+/* ============================= BOOT ============================= */
+renderAll();
+setTimeout(setupDateLimits, 0);
+runAutoWeatherScan();               // check once on load
+setInterval(runAutoWeatherScan, 20000); // then keep checking automatically, like a real weather-monitoring job
+// tick every second while a mechanic is looking at the job pool, so the VIP early-access countdown updates live
+setInterval(() => {
+  if(state.role==='mechanic' && state.page.mechanic==='jobpool') renderAll();
+}, 1000);
+</script>
+</body>
+</html>
