@@ -1,9 +1,30 @@
 {
-  "name": "happy-green-mockup",
-  "version": "1.0.0",
+  "name": "happy-green",
+  "version": "0.1.0",
   "private": true,
-  "description": "HAPPY GREEN - Bangkok Lawn & Garden Marketplace mockup. Static, self-contained HTML (Tailwind CDN + vanilla JS) - no bundler, no build step required.",
+  "description": "HAPPY GREEN - Bangkok Lawn & Garden Marketplace. Full-stack Next.js app backed by Supabase.",
   "scripts": {
-    "build": "echo \"Static HTML site - nothing to bundle. index.html is served as-is.\" && exit 0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^16.2.11",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "@supabase/ssr": "^0.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.7.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^3.4.13",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.12.0",
+    "eslint-config-next": "^16.2.11"
   }
 }

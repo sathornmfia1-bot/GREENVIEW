@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --forest: #1e3b2c;
+  --forest-deep: #122619;
+  --grass: #5b8c5a;
+  --grass-soft: #eaf1e7;
+  --gold: #c99a3d;
+  --gold-soft: #f6ead1;
+  --ink: #1c2b22;
+  --paper: #f7f5ee;
+  --paper-dim: #efebdf;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
